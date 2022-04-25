@@ -1,12 +1,13 @@
-# NTUA ECE SAAS 2022 PROJECT
+# NTUA ECE SAAS 2022 Project
   
-## TEAM 18
-  
-  
-περιγραφή - οδηγίες
-  
+## Team 18
+
 Περιέχονται φάκελοι για 15 microservices. Ο αριθμός είναι εντελώς ενδεικτικός. Δημιουργήστε ακριβώς όσα απαιτούνται από τη λύση σας.
-  
-NOTE: no need to deploy 15 indicative max number of microservices  
-  
-  
+
+- Αλέξανδρος Κουριδάκης
+
+- Λευτέρης Οικονόμου
+
+- Βικέντιος Βιτάλης
+
+- Στέφανος Τσώλος
