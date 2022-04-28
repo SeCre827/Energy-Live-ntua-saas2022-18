@@ -1,0 +1,117 @@
+.mainDiv {
+  padding: 2.4rem 4.8rem 3.2rem 2.4rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* background-color: #b7e0e6; */
+  /* overflow: hidden; */
+}
+
+.info {
+  flex-basis: 7%;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6rem;
+  font-size: 2.4rem;
+}
+
+.info button,
+.info a {
+  /* text-decoration: none; */
+  border: none;
+  font-size: 2.4rem;
+  padding-right: 1rem;
+  padding: 0.5rem;
+  color: #555;
+  background-color: aliceblue;
+  display: inline-block;
+}
+
+.info button:hover,
+.info a:hover {
+  cursor: pointer;
+  background-color: #b7e0e6;
+  border-radius: 1rem;
+}
+.infoDiv {
+  border-radius: 5;
+  flex-basis: 93%;
+  flex-grow: 10;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+
+.loadAndCountry {
+  flex: 0 0 8%;
+  background-color: aliceblue;
+  font-size: 2.4rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chart {
+  padding: 1rem;
+  box-shadow: 0 1.2rem 3.6rem rgba(0, 0, 0, 0.075);
+  border-radius: 2%;
+  background-color: #b7e0e6;
+  flex: 0 0 58%;
+}
+
+.lastUpdate {
+  flex: 0 0 12%;
+  text-align: left;
+}
+
+.helperDiv {
+  flex: 0 0 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chartButtons {
+  padding-bottom: 3rem;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-around;
+}
+
+.chartButtons button {
+  background-color: #c0c6cc;
+  border: 1px solid #c0c6cc;
+  border-radius: 3rem;
+  padding: 0.75rem 3.5rem;
+
+  font-size: 2rem;
+
+  box-shadow: 0 0rem 1.6rem rgba(0, 0, 0, 0.075);
+}
+
+.chartButtons button:hover,
+.chartButtons button:active {
+  background-color: #b7e0e6;
+
+  cursor: pointer;
+}
+
+.finalInfo {
+  border-top: 1px solid black;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.finalInfo a {
+  color: inherit;
+}
+.finalInfo a:hover {
+  background-color: #b7e0e6;
+}
