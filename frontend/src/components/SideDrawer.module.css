@@ -1,0 +1,110 @@
+.mainDiv {
+  padding: 2.4rem 2.4rem 3.2rem 4.8rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* background-color: #b7e0e6; */
+  /* overflow: hidden; */
+}
+
+.mainDiv h1 {
+  flex-basis: 7%;
+
+  /* justify-content: ; */
+  /* padding-bottom: 2.4rem; */
+  text-align: center;
+  font-size: 3rem;
+}
+
+.infoDiv {
+  flex-basis: 93%;
+  /* flex-grow: 10; */
+  /* background-color: #cfeaef; */
+
+  background-color: #b7e0e6;
+  padding: 1rem;
+  box-shadow: 0 1.2rem 3.6rem rgba(0, 0, 0, 0.075);
+  border-radius: 2%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.infoDiv label {
+  flex: 1 1 5%;
+  font-size: 3rem;
+  padding: 0.5rem;
+}
+
+.picker {
+  flex: 1 1 5%;
+  text-align: left;
+  /* display: flex; */
+
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* flex-wrap: wrap; */
+  /* font-size: 3rem; */
+  padding: 1rem 0;
+}
+
+.picker input {
+  font-size: 2rem;
+}
+
+.picker1 {
+  flex-basis: 100%;
+  font-size: 2rem;
+}
+
+.form1 {
+  flex: 1 1 90%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  font-size: 2.4rem;
+}
+
+.form1 select {
+  font: inherit;
+  font-size: 2rem;
+}
+
+.options {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  flex: 1 1 45%;
+  justify-self: end;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+/* bytton shade: 6e868a */
+.submitButton button {
+  /* background-color: aliceblue; */
+  box-shadow: 0 1.2rem 3.6rem rgba(0, 0, 0, 0.075);
+  font: inherit;
+  font-size: 2.4rem;
+  border: 1px solid #6e868a;
+  border-radius: 3rem;
+  padding: 0.75rem 3.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #6e868a;
+}
+
+.submitButton button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #052e34;
+}
+
+.inputs {
+  padding: 0.5rem;
+}
