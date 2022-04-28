@@ -1,0 +1,65 @@
+.main-div {
+  padding: 7.2rem 7.2rem 4.8rem 7.2rem;
+  background-color: #cfeaef;
+  height: 100vh;
+  width: 100%;
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logoDiv {
+  margin: 5vh auto 0rem;
+  max-width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  /* height: 42rem; */
+  height: 42vh;
+  width: auto;
+  box-shadow: 0 0 3.6rem rgba(0, 0, 0, 0.09);
+  border-radius: 2%;
+}
+
+.login {
+  display: flex;
+  text-align: center;
+  margin: 12.8rem auto 0rem;
+  justify-content: center;
+  align-items: center;
+}
+.loginBtn {
+  color: #b7e0e6;
+  padding: 2.4rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  background-color: #0a5b68;
+}
+
+.footer {
+  width: 100%;
+  padding-top: 1.4rem;
+  margin: 12.8rem auto 3.2rem;
+  border-top: black 1px solid;
+}
+
+.footerList {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footerList a {
+  color: #0a5b68;
+  padding: 1rem;
+}
+
+a:hover {
+  color: white;
+  background-color: #052e34;
+}
