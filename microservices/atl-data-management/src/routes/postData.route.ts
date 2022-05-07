@@ -104,9 +104,9 @@ export async function postDataRoute(
   }
 
   await manager.transaction(async (manager) => {
-    // Delete all existing data that should be updated
-    await manager.delete(Data, { country: { id: In(resCodeChanged) } });
     // Delete all existing data for countries whose resolution code changed
+    await manager.delete(Data, { country: { id: In(resCodeChanged) } });
+    // Delete all existing data that should be updated
     await manager.remove(deleteData, { chunk: 1000 });
     // Insert all new and updated data
     await bulkDataInsert(manager, insertData, 1000);

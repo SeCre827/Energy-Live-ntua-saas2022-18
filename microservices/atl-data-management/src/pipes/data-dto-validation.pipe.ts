@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { DateTime } from 'luxon';
-import { Country, ResolutionCodeType } from 'src/entities/country.entity';
+import { Country } from 'src/entities/country.entity';
 import { DataDto } from 'src/input/data-dto.input';
 import { DataDtoSchema } from 'src/schemas/data-dto.schema';
 import { EntityManager } from 'typeorm';
