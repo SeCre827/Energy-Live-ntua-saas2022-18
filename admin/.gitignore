@@ -1,0 +1,11 @@
+# Packages
+node_modules
+
+# Typescript output
+dist
+
+# Google service account credential file
+credentials.json
+
+# Environment variables
+.env

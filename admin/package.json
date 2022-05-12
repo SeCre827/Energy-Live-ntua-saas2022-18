@@ -1,0 +1,26 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "update_files": "node dist/index.js update_files",
+    "reset_files": "node dist/index.js reset_files",
+    "fetch_files": "node dist/index.js fetch_files",
+    "reset": "node dist/index.js reset",
+    "status": "node dist/index.js status"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^17.0.31",
+    "googleapis": "^100.0.0",
+    "typescript": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/luxon": "^2.3.2",
+    "dotenv": "^16.0.0",
+    "kafkajs": "^2.0.0",
+    "luxon": "^2.4.0"
+  }
+}
