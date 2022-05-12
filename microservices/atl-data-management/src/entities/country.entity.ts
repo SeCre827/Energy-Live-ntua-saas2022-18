@@ -7,7 +7,13 @@ export class Country {
   @PrimaryColumn({ type: 'char', length: 2 })
   id: string;
 
-  @Column({ type: 'varchar', length: 30, unique: true })
+  @Column({
+    type: 'varchar',
+    length: 30,
+    unique: true,
+    nullable: true,
+    default: null,
+  })
   name: string;
 
   @Column({

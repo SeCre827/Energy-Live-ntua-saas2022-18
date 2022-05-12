@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
+    "@nestjs/microservices": "^8.4.4",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@types/express": "^4.17.13",
@@ -53,7 +54,9 @@
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "googleapis": "^100.0.0",
     "jest": "^27.2.5",
+    "kafkajs": "^2.0.0",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",

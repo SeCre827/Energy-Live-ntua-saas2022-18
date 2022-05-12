@@ -4,17 +4,14 @@ import { Data } from 'src/entities/data.entity';
 import { DataDto } from 'src/input/data-dto.input';
 import { Between, EntityManager, In } from 'typeorm';
 
-export async function postDataRoute(
-  dataDto: DataDto,
-  manager: EntityManager,
-): Promise<void> {
+export async function storeData(data: DataDto, manager: EntityManager) {
   // Retrieve information about all countries
   const countries = await manager.find(Country);
 
   // Find the index of each country in the countries array
-  const index = new Map<string, number>();
+  const countryIndex = new Map<string, number>();
   for (const [idx, country] of countries.entries()) {
-    index.set(country.id, idx);
+    countryIndex.set(country.id, idx);
   }
 
   // Initialise arrays of data to delete and data to insert
@@ -23,7 +20,7 @@ export async function postDataRoute(
 
   // Find first and last timestamp for which data will be imported
   // Note that we keep all timestamp strings in ISO format and UTC timezone
-  const lastDt = DateTime.fromISO(dataDto.timestamp, { zone: 'utc' });
+  const lastDt = DateTime.fromISO(data.timestamp, { zone: 'utc' });
   const firstDt = lastDt.startOf('month');
 
   // Initialise array of countries whose resolution codes have changed
@@ -34,18 +31,42 @@ export async function postDataRoute(
     country_id: id,
     resolution_code: res,
     entries,
-  } of dataDto.country_data) {
+  } of data.country_data) {
     // Map each timestamp in the imported entries to its corresponding value
     const timestampMap = new Map<string, string>();
     for (const { timestamp, value } of entries) {
       timestampMap.set(timestamp, value);
     }
 
+    // If there are any timestamps missing (according to the country's
+    // resolution code), add them and set their values to null
+    for (let dt = firstDt; dt <= lastDt; dt = incrementDt(dt, res)) {
+      const timestamp = dt.toISO();
+      if (!timestampMap.has(timestamp)) {
+        timestampMap.set(timestamp, null);
+      }
+    }
+
+    // Check if the country exists in the database. If not, create an entry
+    // for it in the database, then import all received data for it
+    if (!countryIndex.has(id)) {
+      countries.push(
+        manager.create(Country, {
+          id: id,
+          resolution_code: res,
+        }),
+      );
+      for (const [timestamp, value] of timestampMap.entries()) {
+        insertData.push(newDataObj(manager, id, timestamp, value));
+      }
+      continue;
+    }
+
     // Check if the current resolution code of the country matches
     // the updated one in the dataDto. If yes, delete all existing data
     // for that country and insert all new data for that country.
-    if (countries[index.get(id)].resolution_code != res) {
-      countries[index.get(id)].resolution_code = res;
+    if (countries[countryIndex.get(id)].resolution_code != res) {
+      countries[countryIndex.get(id)].resolution_code = res;
       resCodeChanged.push(id);
       for (const [timestamp, value] of timestampMap.entries()) {
         insertData.push(newDataObj(manager, id, timestamp, value));
@@ -63,15 +84,6 @@ export async function postDataRoute(
         timestamp: Between(firstDt.toISO(), lastDt.toISO()),
       },
     });
-
-    // If there are any timestamps missing (according to the country's
-    // resolution code), add them and set their values to null
-    for (let dt = firstDt; dt < lastDt; dt = incrementDt(dt, res)) {
-      const timestamp = dt.toISO();
-      if (!timestampMap.has(timestamp)) {
-        timestampMap.set(timestamp, null);
-      }
-    }
 
     // Find the existing data that need to be updated, i.e. the entries
     // whose new value is different than the old one. Delete the old
@@ -104,14 +116,14 @@ export async function postDataRoute(
   }
 
   await manager.transaction(async (manager) => {
+    // Insert new countries and update those whose resolution code changed
+    await manager.save(countries);
     // Delete all existing data for countries whose resolution code changed
     await manager.delete(Data, { country: { id: In(resCodeChanged) } });
     // Delete all existing data that should be updated
     await manager.remove(deleteData, { chunk: 1000 });
     // Insert all new and updated data
     await bulkDataInsert(manager, insertData, 1000);
-    // Update countries whose resolution code changed
-    await manager.save(countries);
   });
 }
 
