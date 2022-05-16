@@ -1,0 +1,1096 @@
+{
+  "countries_pairs": [
+    {
+      "ID": "AT_SI",
+      "country_in": "AT",
+      "country_out": "SI",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "HU_RO",
+      "country_in": "HU",
+      "country_out": "RO",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "DE_LU",
+      "country_in": "DE",
+      "country_out": "LU",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "DE_CH",
+      "country_in": "DE",
+      "country_out": "CH",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "AT_HU",
+      "country_in": "AT",
+      "country_out": "HU",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "DE_BE",
+      "country_in": "DE",
+      "country_out": "BE",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "DE_NL",
+      "country_in": "DE",
+      "country_out": "NL",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "DE_AT",
+      "country_in": "DE",
+      "country_out": "AT",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "NL_DE",
+      "country_in": "NL",
+      "country_out": "DE",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "AT_DE",
+      "country_in": "AT",
+      "country_out": "DE",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "CH_DE",
+      "country_in": "CH",
+      "country_out": "DE",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "NO_DE",
+      "country_in": "NO",
+      "country_out": "DE",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "HU_AT",
+      "country_in": "HU",
+      "country_out": "AT",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "LU_DE",
+      "country_in": "LU",
+      "country_out": "DE",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "BE_DE",
+      "country_in": "BE",
+      "country_out": "DE",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "RO_HU",
+      "country_in": "RO",
+      "country_out": "HU",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "HR_SI",
+      "country_in": "HR",
+      "country_out": "SI",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RS_HR",
+      "country_in": "RS",
+      "country_out": "HR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "DE_NO",
+      "country_in": "DE",
+      "country_out": "NO",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "DK_DE",
+      "country_in": "DK",
+      "country_out": "DE",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "CH_AT",
+      "country_in": "CH",
+      "country_out": "AT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LV_RU",
+      "country_in": "LV",
+      "country_out": "RU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FI_EE",
+      "country_in": "FI",
+      "country_out": "EE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BE_FR",
+      "country_in": "BE",
+      "country_out": "FR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SK_PL",
+      "country_in": "SK",
+      "country_out": "PL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "PL_SK",
+      "country_in": "PL",
+      "country_out": "SK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BE_GB",
+      "country_in": "BE",
+      "country_out": "GB",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "CH_IT",
+      "country_in": "CH",
+      "country_out": "IT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "AT_CH",
+      "country_in": "AT",
+      "country_out": "CH",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "MD_UA",
+      "country_in": "MD",
+      "country_out": "UA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "UA_MD",
+      "country_in": "UA",
+      "country_out": "MD",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "MD_RO",
+      "country_in": "MD",
+      "country_out": "RO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FR_BE",
+      "country_in": "FR",
+      "country_out": "BE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SI_AT",
+      "country_in": "SI",
+      "country_out": "AT",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "DE_CZ",
+      "country_in": "DE",
+      "country_out": "CZ",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BE_LU",
+      "country_in": "BE",
+      "country_out": "LU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BE_NL",
+      "country_in": "BE",
+      "country_out": "NL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "AT_CZ",
+      "country_in": "AT",
+      "country_out": "CZ",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "CZ_PL",
+      "country_in": "CZ",
+      "country_out": "PL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RU_GE",
+      "country_in": "RU",
+      "country_out": "GE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "HU_RS",
+      "country_in": "HU",
+      "country_out": "RS",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SK_HU",
+      "country_in": "SK",
+      "country_out": "HU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "DE_DK",
+      "country_in": "DE",
+      "country_out": "DK",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "UA_RO",
+      "country_in": "UA",
+      "country_out": "RO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SK_UA",
+      "country_in": "SK",
+      "country_out": "UA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RU_EE",
+      "country_in": "RU",
+      "country_out": "EE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NO_NL",
+      "country_in": "NO",
+      "country_out": "NL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "XK_RS",
+      "country_in": "XK",
+      "country_out": "RS",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "XK_ME",
+      "country_in": "XK",
+      "country_out": "ME",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RS_XK",
+      "country_in": "RS",
+      "country_out": "XK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "PL_DE",
+      "country_in": "PL",
+      "country_out": "DE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NO_DK",
+      "country_in": "NO",
+      "country_out": "DK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "DK_SE",
+      "country_in": "DK",
+      "country_out": "SE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SI_IT",
+      "country_in": "SI",
+      "country_out": "IT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NL_BE",
+      "country_in": "NL",
+      "country_out": "BE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SK_CZ",
+      "country_in": "SK",
+      "country_out": "CZ",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FR_DE",
+      "country_in": "FR",
+      "country_out": "DE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "AZ_GE",
+      "country_in": "AZ",
+      "country_out": "GE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GE_RU",
+      "country_in": "GE",
+      "country_out": "RU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GE_TR",
+      "country_in": "GE",
+      "country_out": "TR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "HU_UA",
+      "country_in": "HU",
+      "country_out": "UA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FR_ES",
+      "country_in": "FR",
+      "country_out": "ES",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RS_RO",
+      "country_in": "RS",
+      "country_out": "RO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RO_BG",
+      "country_in": "RO",
+      "country_out": "BG",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "HR_HU",
+      "country_in": "HR",
+      "country_out": "HU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "HR_RS",
+      "country_in": "HR",
+      "country_out": "RS",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BA_HR",
+      "country_in": "BA",
+      "country_out": "HR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SI_HR",
+      "country_in": "SI",
+      "country_out": "HR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "UA_SK",
+      "country_in": "UA",
+      "country_out": "SK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "EE_RU",
+      "country_in": "EE",
+      "country_out": "RU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "DK_NL",
+      "country_in": "DK",
+      "country_out": "NL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "ME_XK",
+      "country_in": "ME",
+      "country_out": "XK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LT_PL",
+      "country_in": "LT",
+      "country_out": "PL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "PL_LT",
+      "country_in": "PL",
+      "country_out": "LT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GB_BE",
+      "country_in": "GB",
+      "country_out": "BE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FR_CH",
+      "country_in": "FR",
+      "country_out": "CH",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RU_FI",
+      "country_in": "RU",
+      "country_out": "FI",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RU_LV",
+      "country_in": "RU",
+      "country_out": "LV",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RO_MD",
+      "country_in": "RO",
+      "country_out": "MD",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "IT_AT",
+      "country_in": "IT",
+      "country_out": "AT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "HR_BA",
+      "country_in": "HR",
+      "country_out": "BA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GB_IE",
+      "country_in": "GB",
+      "country_out": "IE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FI_RU",
+      "country_in": "FI",
+      "country_out": "RU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LT_RU",
+      "country_in": "LT",
+      "country_out": "RU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SE_LT",
+      "country_in": "SE",
+      "country_out": "LT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RU_LT",
+      "country_in": "RU",
+      "country_out": "LT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "ME_RS",
+      "country_in": "ME",
+      "country_out": "RS",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "ME_BA",
+      "country_in": "ME",
+      "country_out": "BA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BA_ME",
+      "country_in": "BA",
+      "country_out": "ME",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "CZ_DE",
+      "country_in": "CZ",
+      "country_out": "DE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "CZ_AT",
+      "country_in": "CZ",
+      "country_out": "AT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "DE_FR",
+      "country_in": "DE",
+      "country_out": "FR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GE_AM",
+      "country_in": "GE",
+      "country_out": "AM",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "UA_HU",
+      "country_in": "UA",
+      "country_out": "HU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "PT_ES",
+      "country_in": "PT",
+      "country_out": "ES",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "MK_RS",
+      "country_in": "MK",
+      "country_out": "RS",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RS_MK",
+      "country_in": "RS",
+      "country_out": "MK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GR_IT",
+      "country_in": "GR",
+      "country_out": "IT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "IT_MT",
+      "country_in": "IT",
+      "country_out": "MT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "IT_CH",
+      "country_in": "IT",
+      "country_out": "CH",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LU_BE",
+      "country_in": "LU",
+      "country_out": "BE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "IT_SI",
+      "country_in": "IT",
+      "country_out": "SI",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "EE_LV",
+      "country_in": "EE",
+      "country_out": "LV",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NL_DK",
+      "country_in": "NL",
+      "country_out": "DK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NL_NO",
+      "country_in": "NL",
+      "country_out": "NO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "MK_XK",
+      "country_in": "MK",
+      "country_out": "XK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "AL_XK",
+      "country_in": "AL",
+      "country_out": "XK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "PL_UA",
+      "country_in": "PL",
+      "country_out": "UA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "UA_PL",
+      "country_in": "UA",
+      "country_out": "PL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SE_PL",
+      "country_in": "SE",
+      "country_out": "PL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "DK_NO",
+      "country_in": "DK",
+      "country_out": "NO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LV_LT",
+      "country_in": "LV",
+      "country_out": "LT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BY_LT",
+      "country_in": "BY",
+      "country_out": "LT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "DE_SE",
+      "country_in": "DE",
+      "country_out": "SE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RS_ME",
+      "country_in": "RS",
+      "country_out": "ME",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "ME_IT",
+      "country_in": "ME",
+      "country_out": "IT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BA_RS",
+      "country_in": "BA",
+      "country_out": "RS",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GB_FR",
+      "country_in": "GB",
+      "country_out": "FR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "IT_FR",
+      "country_in": "IT",
+      "country_out": "FR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "CZ_SK",
+      "country_in": "CZ",
+      "country_out": "SK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RS_HU",
+      "country_in": "RS",
+      "country_out": "HU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "AT_IT",
+      "country_in": "AT",
+      "country_out": "IT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LT_LV",
+      "country_in": "LT",
+      "country_out": "LV",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LT_SE",
+      "country_in": "LT",
+      "country_out": "SE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NO_SE",
+      "country_in": "NO",
+      "country_out": "SE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "AL_ME",
+      "country_in": "AL",
+      "country_out": "ME",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RS_BA",
+      "country_in": "RS",
+      "country_out": "BA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SE_DK",
+      "country_in": "SE",
+      "country_out": "DK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LT_BY",
+      "country_in": "LT",
+      "country_out": "BY",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RS_BG",
+      "country_in": "RS",
+      "country_out": "BG",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "MT_IT",
+      "country_in": "MT",
+      "country_out": "IT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "IT_GR",
+      "country_in": "IT",
+      "country_out": "GR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BG_RS",
+      "country_in": "BG",
+      "country_out": "RS",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "CH_FR",
+      "country_in": "CH",
+      "country_out": "FR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "EE_FI",
+      "country_in": "EE",
+      "country_out": "FI",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NO_FI",
+      "country_in": "NO",
+      "country_out": "FI",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GE_AZ",
+      "country_in": "GE",
+      "country_out": "AZ",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "ES_PT",
+      "country_in": "ES",
+      "country_out": "PT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "LV_EE",
+      "country_in": "LV",
+      "country_out": "EE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "IE_GB",
+      "country_in": "IE",
+      "country_out": "GB",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "HU_HR",
+      "country_in": "HU",
+      "country_out": "HR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FI_SE",
+      "country_in": "FI",
+      "country_out": "SE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SE_FI",
+      "country_in": "SE",
+      "country_out": "FI",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "PL_CZ",
+      "country_in": "PL",
+      "country_out": "CZ",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FI_NO",
+      "country_in": "FI",
+      "country_out": "NO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "AM_GE",
+      "country_in": "AM",
+      "country_out": "GE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "TR_GE",
+      "country_in": "TR",
+      "country_out": "GE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "HU_SK",
+      "country_in": "HU",
+      "country_out": "SK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "ES_FR",
+      "country_in": "ES",
+      "country_out": "FR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BG_RO",
+      "country_in": "BG",
+      "country_out": "RO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RO_RS",
+      "country_in": "RO",
+      "country_out": "RS",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RO_UA",
+      "country_in": "RO",
+      "country_out": "UA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "XK_AL",
+      "country_in": "XK",
+      "country_out": "AL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "XK_MK",
+      "country_in": "XK",
+      "country_out": "MK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "DE_PL",
+      "country_in": "DE",
+      "country_out": "PL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "PL_SE",
+      "country_in": "PL",
+      "country_out": "SE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SE_DE",
+      "country_in": "SE",
+      "country_out": "DE",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "SE_NO",
+      "country_in": "SE",
+      "country_out": "NO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "IT_ME",
+      "country_in": "IT",
+      "country_out": "ME",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "ME_AL",
+      "country_in": "ME",
+      "country_out": "AL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FR_IT",
+      "country_in": "FR",
+      "country_out": "IT",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "FR_GB",
+      "country_in": "FR",
+      "country_out": "GB",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BG_TR",
+      "country_in": "BG",
+      "country_out": "TR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "TR_BG",
+      "country_in": "TR",
+      "country_out": "BG",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "MK_BG",
+      "country_in": "MK",
+      "country_out": "BG",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BG_GR",
+      "country_in": "BG",
+      "country_out": "GR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BY_UA",
+      "country_in": "BY",
+      "country_out": "UA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "TR_GR",
+      "country_in": "TR",
+      "country_out": "GR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GR_AL",
+      "country_in": "GR",
+      "country_out": "AL",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GR_TR",
+      "country_in": "GR",
+      "country_out": "TR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GR_BG",
+      "country_in": "GR",
+      "country_out": "BG",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "UA_BY",
+      "country_in": "UA",
+      "country_out": "BY",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "UA_RU",
+      "country_in": "UA",
+      "country_out": "RU",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "RU_UA",
+      "country_in": "RU",
+      "country_out": "UA",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GR_MK",
+      "country_in": "GR",
+      "country_out": "MK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "MK_GR",
+      "country_in": "MK",
+      "country_out": "GR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "AL_GR",
+      "country_in": "AL",
+      "country_out": "GR",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "BG_MK",
+      "country_in": "BG",
+      "country_out": "MK",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NO_GB",
+      "country_in": "NO",
+      "country_out": "GB",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "GB_NO",
+      "country_in": "GB",
+      "country_out": "NO",
+      "resolution_code": "PT60M"
+    },
+    {
+      "ID": "NL_GB",
+      "country_in": "NL",
+      "country_out": "GB",
+      "resolution_code": "PT15M"
+    },
+    {
+      "ID": "GB_NL",
+      "country_in": "GB",
+      "country_out": "NL",
+      "resolution_code": "PT15M"
+    }
+  ]
+}
