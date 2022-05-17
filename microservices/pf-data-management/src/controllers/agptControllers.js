@@ -1,9 +1,14 @@
 // Na dw to find_query na ginetai me join
 // Ta null values sto csv
-
+const fs = require('fs');
+const path = require('path');
+const sequelize = require('../utils/database');
 const { DateTime } = require('luxon');
 const CountriesPair = require('../models/countries_pair');
+const Country = require('../models/country');
 const PhysicalFlow = require('../models/physicalFlow');
+const ResolutionCode = require('../models/resolutionCode');
+
 const { Op } = require('sequelize');
 
 // Checks is 2 char aplharithetic is valid
@@ -14,6 +19,36 @@ const countryParamValidator = (countryString) => {
     }
   }
   return false;
+};
+
+// url /resetDB
+exports.resetDB = (req, res, next) => {
+  sequelize.sync({ force: true }).then((result) => {
+    console.log('All tables were droped');
+    let countriesData = JSON.parse(
+      fs.readFileSync(path.resolve(__dirname, '../utils/countries.json'))
+    );
+    let countriesPairsData = JSON.parse(
+      fs.readFileSync(path.resolve(__dirname, '../utils/countriesPairs.json'))
+    );
+
+    Country.bulkCreate(countriesData.countriesdata)
+      .then(() => {
+        const resCodes = [{ ID: 'PT15M' }, { ID: 'PT30M' }, { ID: 'PT60M' }];
+        return ResolutionCode.bulkCreate(resCodes);
+      })
+      .then(() => {
+        CountriesPair.bulkCreate(countriesPairsData.countries_pairs);
+      })
+      .then(() => {
+        res.status(200).json({
+          message: `Database reset completed successfully! `,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 };
 
 // url '/getData/:countryFrom/:countryTo/:dateFrom/:dateTo',
@@ -28,7 +63,7 @@ exports.getData = (req, res, next) => {
   let dateTo = DateTime.fromSQL(req.params.dateTo, {
     zone: 'utc',
   }).toISO();
-  console.log(countryFrom, countryTo, dateFrom, dateTo);
+  // console.log(countryFrom, countryTo, dateFrom, dateTo);
   // validation for the countries param
   if (
     !countryParamValidator(countryFrom) ||
@@ -99,7 +134,7 @@ exports.updateData = async (req, res, next) => {
           return next(error);
         }
         let message = `${pfData.length} records where updated `;
-        console.log(message);
+        // console.log(message);
         res.status(200).json({
           message: message,
         });

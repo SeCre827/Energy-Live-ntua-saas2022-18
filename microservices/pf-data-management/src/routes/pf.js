@@ -7,13 +7,16 @@ const agptController = require('../controllers/agptControllers');
 
 const router = express.Router();
 
-router.get('/pog', agptController.pog);
-
+//  url: /update_data endpoint  -> Updates the Database from the data given from in csv
 router.post('/update_data', upload.single('data'), agptController.updateData);
 
+// url '/getData/:countryFrom/:countryTo/:dateFrom/:dateTo', gets the data for a countrie pair between the specified dates
 router.get(
   '/getData/:countryFrom/:countryTo/:dateFrom/:dateTo',
   agptController.getData
 );
+
+// /resetDB route: resets the db and inserts the starting data
+router.post('/resetDB', agptController.resetDB);
 
 module.exports = router;

@@ -8,13 +8,13 @@ const agtpRoutes = require('./routes/pf');
 // Load database and models
 const sequelize = require('./utils/database');
 const ResolutionCode = require('./models/resolutionCode');
-const Country = require('./models/country');
 const PhysicalFlow = require('./models/physicalFlow');
+const Country = require('./models/country');
 const CountriesPair = require('./models/countries_pair');
 // load database starting files
 const app = express();
 
-// Middleware nmzw ta xreizomai
+// Middleware
 app.use(bodyParser.urlencoded()); //form data x-www-form-urlencoded
 app.use(bodyParser.json()); //application json
 // app.use(express.urlencoded({ extended: true }));
