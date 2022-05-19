@@ -1,4 +1,5 @@
 // 2022-01-01T00:15:00+02:00"
+require('dotenv').config();
 const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
@@ -15,9 +16,9 @@ const CountriesPair = require('./models/countries_pair');
 const app = express();
 
 // Middleware
-app.use(bodyParser.urlencoded()); //form data x-www-form-urlencoded
+// app.use(bodyParser.urlencoded()); //form data x-www-form-urlencoded
 app.use(bodyParser.json()); //application json
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 //
 
@@ -47,6 +48,10 @@ CountriesPair.hasMany(PhysicalFlow, {
 });
 //
 
+const consumer = require('./controllers/kafkaConsumer');
+consumer().catch((err) => {
+  console.error('error in consumer: ', err);
+});
 // ROUTES
 
 //Handle all Valid Routes in the pf.js

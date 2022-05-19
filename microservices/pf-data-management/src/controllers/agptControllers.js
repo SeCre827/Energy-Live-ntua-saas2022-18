@@ -51,6 +51,14 @@ exports.resetDB = (req, res, next) => {
   });
 };
 
+// 
+// exports.getDataKafka = (req,res,next) =>{
+
+// }
+
+
+
+
 // url '/getData/:countryFrom/:countryTo/:dateFrom/:dateTo',
 exports.getData = (req, res, next) => {
   let countryFrom = req.params.countryFrom;
@@ -148,6 +156,41 @@ exports.updateData = async (req, res, next) => {
   } catch (error) {
     error.httpStatusCode = 400;
     next(error);
+  }
+};
+
+
+exports.updateData2 = async (data) => {
+  try {
+    if (data === undefined) throw Error('No file provided');
+    // const file = req.file; // raw data = file.buffer
+    // const data = JSON.parse(file.buffer); // Data in js object notation we will need the countries_pair_data property.
+
+    PhysicalFlow.bulkCreate(data.countries_pairs_data, {
+      // ignoreDuplicates: true,
+      updateOnDuplicate: ['value'],
+    })
+      .then((pfData) => {
+        if (!pfData) {
+          const error = new Error(
+            'No data was updated. Check the file you provided!'
+          );
+          error.httpStatusCode = 422;
+          throw error;
+        }
+        let message = `${pfData.length} records where updated `;
+        // console.log(message);
+      console.log(message);
+      })
+      .catch((err) => {
+        console.log(err);
+        const error = new Error('A database error has occured!');
+        error.httpStatusCode = 500;
+        throw error;
+      });
+  } catch (error) {
+    error.httpStatusCode = 400;
+    console.log(error);
   }
 };
 
