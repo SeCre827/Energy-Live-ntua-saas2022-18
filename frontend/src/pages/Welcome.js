@@ -4,7 +4,7 @@ import classes from './Welcome.module.css';
 import logo from '../img/logo.png';
 import GoogleLogin from 'react-google-login';
 import { useLocation, useNavigate } from "react-router-dom";
-
+// prof
 const Welcome = ({ setLoginData }) => {
 
   const location = useLocation();
