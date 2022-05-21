@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { DateTime } = require('luxon');
 
 module.exports = (req, res, next) => {
   const authHeader = req.get('Authorization');
@@ -23,7 +24,14 @@ module.exports = (req, res, next) => {
     throw error;
   }
   // Check if he has days left at licence
-  req.exp = decodedToken.exp;
-  req.licence_expiration = decodedToken.licence_expiration;
+  if (
+    !decodedToken.licence_expiration ||
+    DateTime.fromISO(decodedToken.licence_expiration) < DateTime.now()
+  ) {
+    const error = new Error('Licence has expired.');
+    error.statusCode = 401;
+    throw error;
+  }
+
   next();
 };
