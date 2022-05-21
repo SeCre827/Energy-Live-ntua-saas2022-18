@@ -14,6 +14,8 @@ dotenv.config();
 const port = 5000;
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.options('/signin', cors());
 app.options('/signout', cors());
@@ -28,10 +30,17 @@ app.post(
   passport.authenticate('signin', { session: false }),
   function (req, res) {
     console.log('LOGIN');
+    console.log(process.env.JWT_SECRET);
     res.json({
       token: jwt.sign(req.user, process.env.JWT_SECRET),
     });
   }
+);
+
+app.post(
+  '/extend-licence',
+  passport.authenticate('token', { session: false }),
+  controllers.extendLicense
 );
 
 app.post(
