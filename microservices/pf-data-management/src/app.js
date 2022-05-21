@@ -48,6 +48,7 @@ CountriesPair.hasMany(PhysicalFlow, {
 });
 //
 
+// kafka
 const consumer = require('./controllers/kafkaConsumer');
 consumer().catch((err) => {
   console.error('error in consumer: ', err);
