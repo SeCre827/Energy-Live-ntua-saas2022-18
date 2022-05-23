@@ -4,34 +4,70 @@ import Card from '../UI/Card/Card';
 import classes from './ExtendPlan.module.css';
 import Button from '../UI/Button/Button';
 import { Link } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
+import { DateTime } from 'luxon';
+import jwt_decode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
-const ExtendPlan = ({ token }) => {
+const ExtendPlan = ({ token, setLoginData }) => {
+  const navigate = useNavigate();
   const decodedToken = jwt_decode(token);
-  const [enteredEmail, setEnteredEmail] = useState(decodedToken.email);
+  console.log(decodedToken);
+  const [Email, setEmail] = useState(decodedToken.email);
   const [emailIsValid, setEmailIsValid] = useState();
+  const [FirstName, setFirstName] = useState(decodedToken.first_name);
+  const [LastName, setLastName] = useState(
+    decodedToken.last_name || 'Not provided'
+  );
+  const [lastLogin, setLastLogin] = useState(
+    DateTime.fromISO(decodedToken.last_login).toLocaleString(
+      DateTime.DATETIME_MED
+    )
+  );
 
+  let daysLeft = DateTime.fromISO(decodedToken.licence_expiration)
+    .diffNow(['days', 'hours', 'minutes'])
+    .toObject();
+
+  let daysLeftOutput = `${daysLeft.days} days ${
+    daysLeft.hours
+  } hours & ${Math.trunc(daysLeft.minutes)} mins`;
   const extendByDaysInputRef = useRef();
-  const enteredFirstNameInputRef = useRef();
-  let enteredFirstName;
-  const enteredLastNameInputRef = useRef();
-  let enteredLastName;
-  const enteredLastLoginInputRef = useRef();
-  let enteredLastLogin;
 
   const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
+    setEmail(event.target.value);
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes('@'));
+    setEmailIsValid(Email.includes('@'));
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    enteredFirstName = enteredFirstNameInputRef.current.value;
 
-    console.log('submited');
+    let myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${token}`);
+    myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let urlencoded = new URLSearchParams();
+    urlencoded.append('extendBy', extendByDaysInputRef.current.value);
+
+    let requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+    };
+
+    fetch('http://localhost:5000/extend-licence', requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        // update token in local storage
+        setLoginData(JSON.parse(result).token);
+        // localStorage.setItem('token', JSON.parse(result).token);
+        // redirect
+        navigate('/');
+        console.log(JSON.parse(result).token);
+      })
+      .catch((error) => console.log('error', error));
   };
 
   return (
@@ -43,20 +79,20 @@ const ExtendPlan = ({ token }) => {
             <label htmlFor='firstName'>First Name</label>
             <input
               required
+              readOnly
               type='text'
               id='firstName'
-              value={enteredFirstName}
-              ref={enteredFirstNameInputRef}
+              value={FirstName}
             />
           </div>
           <div className={classes.control}>
             <label htmlFor='lastName'>Last Name</label>
             <input
               required
+              readOnly
               type='text'
               id='lastName'
-              value={enteredLastName}
-              ref={enteredLastNameInputRef}
+              value={LastName}
             />
           </div>
           <div
@@ -68,7 +104,8 @@ const ExtendPlan = ({ token }) => {
             <input
               type='email'
               id='email'
-              value={enteredEmail}
+              readOnly
+              value={Email}
               onChange={emailChangeHandler}
               onBlur={validateEmailHandler}
             />
@@ -77,10 +114,10 @@ const ExtendPlan = ({ token }) => {
             <label htmlFor='lastLogin'>Last Login</label>
             <input
               required
+              readOnly
               type='text'
               id='lastLogin'
-              value={enteredLastLogin}
-              ref={enteredLastLoginInputRef}
+              value={lastLogin}
             />
           </div>
           <div className={classes.containerDiv}>
@@ -88,7 +125,7 @@ const ExtendPlan = ({ token }) => {
               <span>Days left</span>
               <input
                 type='text'
-                value='5'
+                value={daysLeftOutput}
                 readOnly
                 className={classes.daysLeft}
               />
