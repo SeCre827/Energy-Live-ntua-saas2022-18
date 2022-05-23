@@ -17,10 +17,13 @@ exports.extendLicense = async (req, res) => {
       email: req.user.email,
     },
   });
-  const prevDateTime = DateTime.fromISO(user.licence_expiration);
+  const prevDateTime = DateTime.fromJSDate(user.licence_expiration);
   let dateTime;
   // check if licence is valid
-  if (user.licence_expiration && prevDateTime > DateTime.now()) {
+  if (
+    user.licence_expiration &&
+    prevDateTime.diffNow('seconds').toObject().seconds > 0
+  ) {
     dateTime = prevDateTime.plus({
       days: req.body.extendBy,
     });
