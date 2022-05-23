@@ -52,7 +52,7 @@ function App() {
           path='/extend-plan'
           element={
             token ? (
-              <ExtendPlan token={token} />
+              <ExtendPlan token={token} setLoginData={setToken} />
             ) : (
               <Welcome setLoginData={setToken} />
             )

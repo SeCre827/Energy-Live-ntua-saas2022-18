@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import Chart from './Chart';
 import classes from './MainContent.module.css';
 import jwt_decode from 'jwt-decode';
+import { DateTime } from 'luxon';
 
 const MainContent = ({ token, setLoginData }) => {
   const decodedToken = jwt_decode(token);
+
+  let daysLeft = DateTime.fromISO(decodedToken.licence_expiration)
+    .diffNow('days')
+    .toObject();
 
   const doLogout = async () => {
     try {
@@ -74,7 +79,7 @@ const MainContent = ({ token, setLoginData }) => {
           </div>
           <div className={classes.finalInfo}>
             <span>Service Status: #Live</span>
-            <span>Days Left: #27</span>
+            <span>Days Left: {Math.ceil(daysLeft.days)}</span>
             <Link to='/extend-plan'>Extend Plan</Link>
             <Link to='/about'>About</Link>
           </div>
