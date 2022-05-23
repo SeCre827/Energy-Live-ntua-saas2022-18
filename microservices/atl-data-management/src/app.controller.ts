@@ -1,15 +1,16 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Params } from './input/params.input';
-import { ParamsValidationPipe } from './pipes/params-validation.pipe';
 import { EventPattern } from '@nestjs/microservices';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('/getData/:countryID/:dateFrom/:dateTo')
-  async getData(@Param(ParamsValidationPipe) params: Params) {
+  async getData(@Param() params: Params) {
     return this.appService.getData(params);
   }
 

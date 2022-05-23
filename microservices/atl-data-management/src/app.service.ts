@@ -11,6 +11,8 @@ import { Country } from './entities/country.entity';
 import { ClientKafka } from '@nestjs/microservices';
 import { readFile } from 'fs/promises';
 import { zeroPad } from './utils/zeroPad';
+import { validateParams } from './utils/validateParams';
+import { DateTime } from 'luxon';
 
 @Injectable()
 export class AppService {
@@ -20,6 +22,18 @@ export class AppService {
   ) {}
 
   async getData(params: Params) {
+    // Check that request parameters are valid
+    await validateParams(params, this.manager);
+
+    // Convert from YYYYMMDD format to ISO format
+    params.dateFrom = DateTime.fromISO(params.dateFrom, {
+      zone: 'utc',
+    }).toISO();
+    params.dateTo = DateTime.fromISO(params.dateTo, { zone: 'utc' })
+      .endOf('day')
+      .toISO();
+
+    // Return requested data from database
     return getData(params, this.manager);
   }
 
