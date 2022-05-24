@@ -2,18 +2,6 @@
 
 The microservices developed in this project will communicate via an instance of Apache Kafka. When the project is initialised, a broker for that instance of Kafka will be initialised and the following topics will be created:
 
-- USER_CREATED
-  - Publisher: **User Management**
-    - Event: A new user has been created
-  - Subscriber: **Licence Management**
-    - Action: Update the list of users in the local database
-    
-- LICENCE_UPDATED
-  - Publisher: **Licence Management**
-    - Event: A user's licence has been updated
-  - Subscriber: **User Management**
-    - Action: Update user's licence expiration date in the local database
-
 - FETCHED_{ATL, AGPT, PF}
   - Publishers: **{ATL, AGPT, PF} Data Fetch**
     - Event: A new CSV file with relevant data has been downloaded from the SFTP server, has been parsed into a JSON file, and has then been uploaded to Google Drive
