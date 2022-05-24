@@ -13,7 +13,7 @@ const checkCountryID = (countryString) => {
 };
 
 //AGPTController.getData
-// URI '/getData/:countryID/:productionType/:dateFrom/:dateTo'
+// URI '/getData/:country_ID/:production_type/:dateFrom/:dateTo'
 exports.getData = (req, res, next) => {
     let countryID = req.params.country_ID;
     let prodType = req.params.production_type;
@@ -35,16 +35,20 @@ exports.getData = (req, res, next) => {
             const error = new Error('No data available.');
             return next(error);
         }
+
+        // RETURN all data in a json
+        // timestamp-value pairs
+
         let totalValue = 0;
         for (const entry of agpt) {
             console.log(entry.value);
             totalValue += parseFloat(entry.value);
         }
+        // return an array in message
         res.status(200).json({
             message: `The total AGPT value is ${totalValue}`,
         });
-    })
-        .catch((err) => {
+    }).catch((err) => {
             console.log('Error handler AGPTController');
             console.log(err);
         });
@@ -57,6 +61,7 @@ exports.postData = async (req, res, next) => {
             throw Error('File not found.');
         const file = req.file;
         const data = JSON.parse(file.buffer);
+        console.log(data);
 
         AggrGenerationPerType.bulkCreate(data.countries_data, { updateOnDuplicate: ['value'] })
             .then((agpt) => {
@@ -66,8 +71,7 @@ exports.postData = async (req, res, next) => {
                 }
                 let message = `${agpt.length} entries were updated.`;
                 res.status(200).json({ message: message });
-            })
-            .catch((err) => {
+            }).catch((err) => {
                 console.log('A database error has occurred.');
                 next(err);
             })
