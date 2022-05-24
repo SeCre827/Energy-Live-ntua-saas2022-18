@@ -49,7 +49,7 @@ function groupByCountries(filteredData) {
     return countryData;
 }
 
-async function csvToJson(path, time) {
+async function csvToJson(path) {
     // Parse CSV into JSON
     const jsonArray = await csv({ delimiter: '\t' }).fromFile(path);
 
@@ -61,13 +61,14 @@ async function csvToJson(path, time) {
     await writeFile(
         'AGPT_Data.json',
         JSON.stringify({
-            timestamp: DateTime.fromISO(time, { zone: 'utc' }).toISO({ zone: 'utc' }),
+            //timestamp: DateTime.fromISO(time, { zone: 'utc' }).toISO({ zone: 'utc' }),
             countries_data: groupByCountries(filteredData),
             //country: filteredData.country,
             //value: filteredData.value,
             //production_type: filteredData.production_type,
             //resolution_code: filteredData.resolution_code,
+            // agptData: filteredData,
         })
     );
 }
-csvToJson(process.argv[2], process.argv[3]);
+csvToJson(process.argv[2]);
