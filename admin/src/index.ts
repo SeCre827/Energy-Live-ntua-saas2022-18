@@ -6,6 +6,7 @@ import { reset } from './reset';
 import { updateFiles } from './updateFiles';
 import { status } from './status';
 import { resetFiles } from './resetFiles';
+import { deleteUploaded } from './deleteUploaded';
 
 /**
  * APACHE KAFKA CONFIGURATION
@@ -74,6 +75,8 @@ async function main() {
       await updateFiles(drive); break;
     case 'reset_files':
       await resetFiles(drive); break;
+    case 'delete_uploaded':
+      await deleteUploaded(drive); break;
     case 'fetch_files':
       await fetchFiles(producer); break;
     case 'reset':
