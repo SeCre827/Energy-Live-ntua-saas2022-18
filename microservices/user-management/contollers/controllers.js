@@ -21,7 +21,7 @@ exports.extendLicense = async (req, res) => {
   let dateTime;
 
   // check if licence is valid
-  if (prevDateTime && prevDateTime > DateTime.now()) {
+  if (prevDateTime.isValid && prevDateTime > DateTime.now()) {
     dateTime = prevDateTime.plus({
       days: req.body.extendBy,
     });
