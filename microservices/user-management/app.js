@@ -30,7 +30,6 @@ app.post(
   passport.authenticate('signin', { session: false }),
   function (req, res) {
     console.log('LOGIN');
-    console.log(process.env.JWT_SECRET);
     res.json({
       token: jwt.sign(req.user, process.env.JWT_SECRET),
     });

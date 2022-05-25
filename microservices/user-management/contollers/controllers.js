@@ -19,17 +19,14 @@ exports.extendLicense = async (req, res) => {
   });
   const prevDateTime = DateTime.fromJSDate(user.licence_expiration);
   let dateTime;
+
   // check if licence is valid
-  if (
-    user.licence_expiration &&
-    prevDateTime.diffNow('seconds').toObject().seconds > 0
-  ) {
+  if (prevDateTime.isValid && prevDateTime > DateTime.now()) {
     dateTime = prevDateTime.plus({
       days: req.body.extendBy,
     });
   }
-  //  check if licence is null or expired
-  else {
+  else { // check if licence is null or expired
     dateTime = DateTime.now().plus({
       days: req.body.extendBy,
     });
@@ -40,9 +37,9 @@ exports.extendLicense = async (req, res) => {
     message: `License updated`,
     token: jwt.sign(
       {
-        email: req.user.email,
+        email: user.email,
         first_name: user.first_name,
-        last_name: req.user.last_name,
+        last_name: user.last_name,
         last_login: user.last_login,
         licence_expiration: user.licence_expiration,
         exp: req.user.exp,
@@ -70,9 +67,12 @@ exports.signInStrategy = new CustomStrategy(async function (req, done) {
     //  check if user does not exist
     let last_login_buffer;
     if (!user) {
+      // Split name into first and last names
+      const names = name.split(' ');
       user = await User.create({
         email: email,
-        first_name: name,
+        first_name: names[0],
+        last_name: names.length === 1 ? null : names[1],
         last_login: new Date(),
         licence_expiration: null,
       });
