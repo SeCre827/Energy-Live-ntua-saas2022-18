@@ -35,27 +35,20 @@ exports.getData = (req, res, next) => {
             const error = new Error('No data available.');
             return next(error);
         }
-
-        // RETURN all data in a json
-        // timestamp-value pairs
-
-        let totalValue = 0;
-        let rescode = '';
-        for (const entry of agpt) {
-            //console.log(entry.value);
-            totalValue += parseFloat(entry.value);
-            rescode = entry.resolution_code;
+        let data1 = [];
+        const new_data = {
+            country_ID: countryID,
+            production_type: prodType,
+            entries: [],
+        };
+        for (const item of agpt) {
+            new_data.entries.push({
+                timestamp: item.timestamp,
+                value: item.value,
+            });
         }
-        //let timestamp = { [Op.between]: [dateFrom, dateTo] };
-        // return an array in message
-        res.status(200).json({
-            country_ID:  `${countryID}`,
-            timestamp:  `${agpt.timestamp}`,
-            production_type:  `${prodType}`,
-            resolution_code: `${rescode}`,
-            value: `${totalValue}`,
-
-        });
+        data1.push(new_data);
+        res.status(200).json(data1);
     }).catch((err) => {
         console.log('Error handler AGPTController');
         console.log(err);
@@ -100,7 +93,7 @@ exports.resetData = (req, res, next) => {
         );
         Countries.bulkCreate(countriesData.countriesdata)
             .then(() => {
-                const resolutionCodes = [{ ID: 'P15M'}, { ID: 'PT30M'}, { ID: 'PT60M' }];
+                const resolutionCodes = [{ ID: 'PT15M'}, { ID: 'PT30M'}, { ID: 'PT60M' }];
                 ResolutionCodes.bulkCreate(resolutionCodes);
             })
             .then(() => {
