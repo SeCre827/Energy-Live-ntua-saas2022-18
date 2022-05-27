@@ -7,16 +7,16 @@ const Countries = sequelize.define(
         ID: {
             type: Sequelize.DataTypes.STRING(2),
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
         },
         name: {
             type: Sequelize.DataTypes.STRING,
             allowNull: false
         },
-        resolution_code: {
-            type: Sequelize.DataTypes.STRING(5),
-            allowNull: false
-        }
+        //resolution_code: {
+         //   type: Sequelize.DataTypes.STRING(5),
+          //  allowNull: false
+        //}
     },
     { timestamps: false }
 );

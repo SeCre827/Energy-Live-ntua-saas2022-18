@@ -19,6 +19,10 @@ const AggrGenerationPerType = sequelize.define(
             type: Sequelize.DataTypes.STRING,
             allowNull: false
         },
+        resolution_code: {
+            type: Sequelize.DataTypes.STRING(5),
+            allowNull: false,
+        },
         value: {
             type: Sequelize.DataTypes.DECIMAL,
             allowNull: true
