@@ -11,43 +11,6 @@ function filterProperties(item) {
         value: (item.ActualGenerationOutput || 0),
     };
 }
-/*
-function groupByCountries(filteredData) {
-    // Makes a map with key based on country and value an array of objects of the corresponding entries
-    //  Map -> key:Country value: [{},{}]
-    let group = new Map();
-    for (const item of filteredData) {
-        if (!group.has(item.country_id)) {
-            group.set(item.country_id, []);
-        }
-        group.get(item.country_id).push({
-            value: item.value,
-            timestamp: item.timestamp,
-            production_type: item.production_type,
-            resolution_code: item.resolution_code,
-        });
-    }
-    let countryData = [];
-    for (const [country_id, items] of group.entries()) {
-        const new_data = {
-            country_id: country_id,
-            production_type: null,
-            resolution_code: null,
-            entries: [],
-        };
-        new_data.production_type = items.at(-2).production_type;
-        new_data.resolution_code = items.at(-1).resolution_code;
-        for (const item of items) {
-            new_data.entries.push({
-                value: item.value,
-                timestamp: DateTime.fromSQL(item.timestamp, { zone: 'utc' }).toISO(),
-            });
-        }
-        countryData.push(new_data);
-    }
-    return countryData;
-}
-*/
 
 async function csvToJson(path) {
     // Parse CSV into JSON
@@ -62,7 +25,6 @@ async function csvToJson(path) {
         'AGPT_Data.json',
         JSON.stringify({
             //timestamp: DateTime.fromISO(time, { zone: 'utc' }).toISO({ zone: 'utc' }),
-            //countries_data: groupByCountries(filteredData),
             countries_data: filteredData,
         })
     );
