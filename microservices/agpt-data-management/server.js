@@ -28,8 +28,8 @@ const forcesync = true;
 
 sequelize
     .sync({ force: forcesync })
-    .then((res) => {
-        // if flag = true -> write over the database, if flag = false -> do not write over
+    .then(() => {
+        // if flag = true -> write over the database, if flag = false -> don't write over the database
         if (forcesync) {
             let countriesData = JSON.parse((fs.readFileSync('./utils/countriesdata.json')).toString());
             let productiontypesData = JSON.parse((
@@ -38,16 +38,16 @@ sequelize
 
             Countries.bulkCreate(countriesData.countriesdata)
                 .then(() => {
-                    console.log('Countries Data created successfully.');
+                    console.log('Countries data created successfully.');
                     const resolutioncodes = [{ ID: 'PT15M' }, { ID: 'PT30M' }, { ID: 'PT60M' }];
                     return ResolutionCodes.bulkCreate(resolutioncodes);
                 })
                 .then(() => {
-                    console.log('Resolution Codes created successfully.');
+                    console.log('Resolution Codes data created successfully.');
                     ProductionTypes.bulkCreate(productiontypesData.productiontypes);
                 })
                 .then(() => {
-                    console.log('Generation Types created successfully.');
+                    console.log('Generation Types data created successfully.');
                 })
                 .catch((err) => {
                     console.log(err);
@@ -58,5 +58,5 @@ sequelize
         app.listen(4009);
     })
     .catch((error) => {
-        console.log('From error Logger at app: ', error.message);
+        console.log('From error logger at app: ', error.message);
     });
