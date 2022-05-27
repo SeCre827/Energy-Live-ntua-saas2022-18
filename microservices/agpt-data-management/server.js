@@ -6,7 +6,7 @@ const AggrGenerationPerType = require('./models/aggrgenerationpertype');
 const sequelize = require("./utils/database");
 const fs = require("fs");
 
-ResolutionCodes.hasMany(Countries, {
+ResolutionCodes.hasMany(AggrGenerationPerType, {
     foreignKey: 'resolution_code',
     constraints: true,
     onDelete: 'SET NULL',
@@ -24,15 +24,14 @@ ProductionTypes.hasMany(AggrGenerationPerType, {
     onDelete: 'SET NULL',
 });
 
-const forcesync = false;
+const forcesync = true;
 
 sequelize
     .sync({ force: forcesync })
     .then((res) => {
-        // Connection established now create counties
         // if flag = true -> write over the database, if flag = false -> do not write over
         if (forcesync) {
-            let countriesData = JSON.parse((fs.readFileSync('./utils/countries.json')).toString());
+            let countriesData = JSON.parse((fs.readFileSync('./utils/countriesdata.json')).toString());
             let productiontypesData = JSON.parse((
                 fs.readFileSync('./utils/generationtypes.json')).toString()
             );
@@ -45,7 +44,7 @@ sequelize
                 })
                 .then(() => {
                     console.log('Resolution Codes created successfully.');
-                    ProductionTypes.bulkCreate(productiontypesData);
+                    ProductionTypes.bulkCreate(productiontypesData.productiontypes);
                 })
                 .then(() => {
                     console.log('Generation Types created successfully.');
