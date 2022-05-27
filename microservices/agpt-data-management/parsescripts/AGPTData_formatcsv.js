@@ -4,14 +4,14 @@ const { writeFile } = require('fs/promises');
 
 function filterProperties(item) {
     return {
-        country_id:  item.MapCode,
+        country_ID:  item.MapCode,
         timestamp: item.DateTime,
-        value: item.ActualGenerationOutput,
         production_type: item.ProductionType,
         resolution_code: item.ResolutionCode,
+        value: (item.ActualGenerationOutput || 0),
     };
 }
-
+/*
 function groupByCountries(filteredData) {
     // Makes a map with key based on country and value an array of objects of the corresponding entries
     //  Map -> key:Country value: [{},{}]
@@ -27,7 +27,6 @@ function groupByCountries(filteredData) {
             resolution_code: item.resolution_code,
         });
     }
-
     let countryData = [];
     for (const [country_id, items] of group.entries()) {
         const new_data = {
@@ -48,6 +47,7 @@ function groupByCountries(filteredData) {
     }
     return countryData;
 }
+*/
 
 async function csvToJson(path) {
     // Parse CSV into JSON
@@ -62,12 +62,8 @@ async function csvToJson(path) {
         'AGPT_Data.json',
         JSON.stringify({
             //timestamp: DateTime.fromISO(time, { zone: 'utc' }).toISO({ zone: 'utc' }),
-            countries_data: groupByCountries(filteredData),
-            //country: filteredData.country,
-            //value: filteredData.value,
-            //production_type: filteredData.production_type,
-            //resolution_code: filteredData.resolution_code,
-            // agptData: filteredData,
+            //countries_data: groupByCountries(filteredData),
+            countries_data: filteredData,
         })
     );
 }
