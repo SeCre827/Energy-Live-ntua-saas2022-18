@@ -40,19 +40,27 @@ exports.getData = (req, res, next) => {
         // timestamp-value pairs
 
         let totalValue = 0;
+        let rescode = '';
         for (const entry of agpt) {
-            console.log(entry.value);
+            //console.log(entry.value);
             totalValue += parseFloat(entry.value);
+            rescode = entry.resolution_code;
         }
+        //let timestamp = { [Op.between]: [dateFrom, dateTo] };
         // return an array in message
         res.status(200).json({
-            message: `The total AGPT value is ${totalValue}`,
+            country_ID:  `${countryID}`,
+            timestamp:  `${agpt.timestamp}`,
+            production_type:  `${prodType}`,
+            resolution_code: `${rescode}`,
+            value: `${totalValue}`,
+
         });
     }).catch((err) => {
-            console.log('Error handler AGPTController');
-            console.log(err);
-        });
-    };
+        console.log('Error handler AGPTController');
+        console.log(err);
+    });
+};
 
 //AGPTController.postData
 exports.postData = async (req, res, next) => {
@@ -61,7 +69,7 @@ exports.postData = async (req, res, next) => {
             throw Error('File not found.');
         const file = req.file;
         const data = JSON.parse(file.buffer);
-        console.log(data);
+        //console.log(data);
 
         AggrGenerationPerType.bulkCreate(data.countries_data, { updateOnDuplicate: ['value'] })
             .then((agpt) => {
@@ -72,17 +80,17 @@ exports.postData = async (req, res, next) => {
                 let message = `${agpt.length} entries were updated.`;
                 res.status(200).json({ message: message });
             }).catch((err) => {
-                console.log('A database error has occurred.');
-                next(err);
-            })
+            console.log('A database error has occurred.');
+            console.log(err);
+        })
     } catch (error) {
-        next(error);
+        console.log(error);
     }
 }
 
 //AGPTController.resetData
 exports.resetData = (req, res, next) => {
-    sequelize.sync({ force: true }).then((result) => {
+    sequelize.sync({ force: true }).then(() => {
         console.log('All tables were dropped.');
         let countriesData = JSON.parse(
             (fs.readFileSync(path.resolve(__dirname, '../utils/countriesdata.json'))).toString()
@@ -93,14 +101,17 @@ exports.resetData = (req, res, next) => {
         Countries.bulkCreate(countriesData.countriesdata)
             .then(() => {
                 const resolutionCodes = [{ ID: 'P15M'}, { ID: 'PT30M'}, { ID: 'PT60M' }];
-                return ResolutionCodes.bulkCreate(resolutionCodes);
-                })
+                ResolutionCodes.bulkCreate(resolutionCodes);
+            })
             .then(() => {
-                ProductionTypes.bulkCreate(generationtypesData);
+                ProductionTypes.bulkCreate(generationtypesData.productiontypes);
+            })
+            .then(() => {
+                AggrGenerationPerType.destroy( {where: {}});
             })
             .then(() => {
                 res.status(200).json({ message: 'Database was reset.'});
             })
-            .catch((err) => { next(err); });
+            .catch((err) => { console.log(err); });
     });
 };
