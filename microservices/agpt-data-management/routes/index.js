@@ -6,7 +6,7 @@ const upload = multer();
 const AGPTController = require('../controllers/AGPTControllers')
 
 /* GET AGPT data for a country, selecting the production type and time range. */
-router.get('/getData/:countryID/:productionType/:dateFrom/:dateTo', AGPTController.getData);
+router.get('/getData/:country_ID/:production_type/:dateFrom/:dateTo', AGPTController.getData);
 
 /* POST AGPT data for a country, selecting the production type and time range. */
 router.post('/postData', upload.single('data'), AGPTController.postData);
