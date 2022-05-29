@@ -13,10 +13,6 @@ const Countries = sequelize.define(
             type: Sequelize.DataTypes.STRING,
             allowNull: false
         },
-        //resolution_code: {
-         //   type: Sequelize.DataTypes.STRING(5),
-          //  allowNull: false
-        //}
     },
     { timestamps: false }
 );

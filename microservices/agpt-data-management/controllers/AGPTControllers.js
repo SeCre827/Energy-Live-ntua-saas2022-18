@@ -7,6 +7,7 @@ const { DateTime } = require('luxon');
 const fs = require("fs");
 const path = require("path");
 const { Op } = require('sequelize');
+const CountryProduction = require('../models/countryProduction');
 
 const checkCountryID = (countryString) => {
     return (countryString.length === 2) && (/^[A-Z]{2}$/.test(countryString));
@@ -21,8 +22,10 @@ exports.getData = (req, res, next) => {
         const error = new Error('Country ID consists of two uppercase letters, e.g. "GR".');
         return next(error);
     }
-    let dateFrom = DateTime.fromSQL(req.params.dateFrom, { zone: 'utc' }).toISO();
-    let dateTo = DateTime.fromSQL(req.params.dateTo, { zone: 'utc' }).toISO();
+    let dateFrom = DateTime.fromISO(req.params.dateFrom, { zone: 'utc' }).toISO();
+    let dateTo = DateTime.fromISO(req.params.dateTo, { zone: 'utc' }).endOf('day').toISO();
+
+    console.log(countryID, prodType, dateFrom, dateTo);
 
     AggrGenerationPerType.findAll({
         where: {
@@ -35,7 +38,6 @@ exports.getData = (req, res, next) => {
             const error = new Error('No data available.');
             return next(error);
         }
-        let data1 = [];
         const new_data = {
             country_ID: countryID,
             production_type: prodType,
@@ -47,31 +49,22 @@ exports.getData = (req, res, next) => {
                 value: item.value,
             });
         }
-        data1.push(new_data);
-        res.status(200).json(data1);
+        res.status(200).json(new_data);
     }).catch((err) => {
         console.log('Error handler AGPTController');
         console.log(err);
     });
 };
 
-//AGPTController.postData
-exports.postData = async (req, res, next) => {
+exports.importData = async (data) => {
     try {
-        if (req.file === undefined)
-            throw Error('File not found.');
-        const file = req.file;
-        const data = JSON.parse(file.buffer);
-        //console.log(data);
-
-        AggrGenerationPerType.bulkCreate(data.countries_data, { updateOnDuplicate: ['value'] })
+        AggrGenerationPerType.bulkCreate(data, { updateOnDuplicate: ['value'] })
             .then((agpt) => {
                 if (!agpt) {
                     const error = new Error('Error, data was not updated.');
                     return next(error);
                 }
-                let message = `${agpt.length} entries were updated.`;
-                res.status(200).json({ message: message });
+                console.log(`${agpt.length} entries were updated.`);
             }).catch((err) => {
             console.log('A database error has occurred.');
             console.log(err);
@@ -82,7 +75,7 @@ exports.postData = async (req, res, next) => {
 }
 
 //AGPTController.resetData
-exports.resetData = (req, res, next) => {
+exports.resetData = () => {
     sequelize.sync({ force: true }).then(() => {
         console.log('All tables were dropped.');
         let countriesData = JSON.parse(
@@ -91,6 +84,10 @@ exports.resetData = (req, res, next) => {
         let generationtypesData = JSON.parse(
             (fs.readFileSync(path.resolve(__dirname, '../utils/generationtypes.json'))).toString()
         );
+        const countryProductionData = JSON.parse(
+            fs.readFileSync('./utils/country_production.json').toString()
+        );
+
         Countries.bulkCreate(countriesData.countriesdata)
             .then(() => {
                 const resolutionCodes = [{ ID: 'PT15M'}, { ID: 'PT30M'}, { ID: 'PT60M' }];
@@ -100,10 +97,10 @@ exports.resetData = (req, res, next) => {
                 ProductionTypes.bulkCreate(generationtypesData.productiontypes);
             })
             .then(() => {
-                AggrGenerationPerType.destroy( {where: {}});
+                CountryProduction.bulkCreate(countryProductionData);
             })
             .then(() => {
-                res.status(200).json({ message: 'Database was reset.'});
+                AggrGenerationPerType.destroy({ where: {} });
             })
             .catch((err) => { console.log(err); });
     });
