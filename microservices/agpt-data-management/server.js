@@ -3,48 +3,56 @@ const Countries = require('./models/countries');
 const ProductionTypes = require('./models/productiontypes');
 const ResolutionCodes = require('./models/resolutioncodes');
 const AggrGenerationPerType = require('./models/aggrgenerationpertype');
+const CountryProduction = require('./models/countryProduction');
 const sequelize = require("./utils/database");
 const fs = require("fs");
 
-ResolutionCodes.hasMany(AggrGenerationPerType, {
+ResolutionCodes.hasMany(CountryProduction, {
     foreignKey: 'resolution_code',
     constraints: true,
     onDelete: 'SET NULL',
 });
 
-Countries.hasMany(AggrGenerationPerType, {
+Countries.hasMany(CountryProduction, {
     foreignKey: 'country_ID',
     constraints: true,
     onDelete: 'SET NULL',
 });
 
-ProductionTypes.hasMany(AggrGenerationPerType, {
+ProductionTypes.hasMany(CountryProduction, {
     foreignKey: 'production_type',
     constraints: true,
     onDelete: 'SET NULL',
 });
 
-const forcesync = true;
+const forcesync = false;
 
 sequelize
     .sync({ force: forcesync })
     .then(() => {
         // if flag = true -> write over the database, if flag = false -> don't write over the database
         if (forcesync) {
-            let countriesData = JSON.parse((fs.readFileSync('./utils/countriesdata.json')).toString());
-            let productiontypesData = JSON.parse((
+            const countriesData = JSON.parse((fs.readFileSync('./utils/countriesdata.json')).toString());
+            const productiontypesData = JSON.parse((
                 fs.readFileSync('./utils/generationtypes.json')).toString()
+            );
+            const countryProductionData = JSON.parse(
+                fs.readFileSync('./utils/country_production.json').toString()
             );
 
             Countries.bulkCreate(countriesData.countriesdata)
                 .then(() => {
-                    console.log('Countries data created successfully.');
                     const resolutioncodes = [{ ID: 'PT15M' }, { ID: 'PT30M' }, { ID: 'PT60M' }];
-                    return ResolutionCodes.bulkCreate(resolutioncodes);
+                    ResolutionCodes.bulkCreate(resolutioncodes);
+                    console.log('Countries data created successfully.');
                 })
                 .then(() => {
-                    console.log('Resolution Codes data created successfully.');
                     ProductionTypes.bulkCreate(productiontypesData.productiontypes);
+                    console.log('Resolution Codes data created successfully.');
+                })
+                .then(() => {
+                    CountryProduction.bulkCreate(countryProductionData);
+                    console.log('Country Production data created successfully.');
                 })
                 .then(() => {
                     console.log('Generation Types data created successfully.');

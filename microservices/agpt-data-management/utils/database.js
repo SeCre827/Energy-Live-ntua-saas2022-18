@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('agpt-data-management-db', 'postgres', 'root', {
+const sequelize = new Sequelize('agpt_data', 'admin', 'password', {
     host: 'localhost',
     dialect: 'postgres',
     logging: false
