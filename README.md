@@ -2,6 +2,10 @@
   
 ## Team 18
 
+<p align="center">
+  <img src="![logo](https://user-images.githubusercontent.com/62433719/173231595-c83f613f-e583-4546-9752-8001b7146c61.png)" alt="saas custom image"/>
+</p>
+
 - Αλέξανδρος Κουριδάκης
 
 - Λευτέρης Οικονόμου
