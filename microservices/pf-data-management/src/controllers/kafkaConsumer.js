@@ -39,7 +39,7 @@ const kafka = new Kafka({
   brokers: [process.env.KAFKA_URI],
 });
 
-exports.kafkaController = async () => {
+kafkaController = async () => {
   // Initialise Google Drive service
   const drive = await initDrive();
 
@@ -52,7 +52,7 @@ exports.kafkaController = async () => {
   await consumer.connect();
   await consumer.subscribe({ 
     topics: [
-      process.env.FETCHED_TOPIC, 
+      process.env.FETCH_TOPIC, 
       process.env.RESET_TOPIC, 
       process.env.STATUS_TOPIC
     ] 
@@ -62,7 +62,7 @@ exports.kafkaController = async () => {
   await consumer.run({
     eachMessage: async ({ topic, message }) => {
       // Check in which topic the received message belongs, then continue appropriately
-      if (topic === process.env.FETCHED_TOPIC) {
+      if (topic === process.env.FETCH_TOPIC) {
         // Download parsed file from Drive
         const id = JSON.parse(message.value).id;
         data = await downloadData(drive, id);
@@ -94,3 +94,5 @@ exports.kafkaController = async () => {
     },
   });
 };
+
+module.exports = kafkaController;
