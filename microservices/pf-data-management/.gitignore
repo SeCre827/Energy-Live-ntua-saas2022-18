@@ -37,4 +37,5 @@ lerna-debug.log*
 /src/credentials.json
 
 # Environment variables
+.env
 /node_modules

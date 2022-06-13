@@ -3,7 +3,7 @@
 ## Team 18
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/62433719/173231595-c83f613f-e583-4546-9752-8001b7146c61.png" width="650" height="350" alt="saas custom image"/>
+  <img src="https://user-images.githubusercontent.com/62433719/173231595-c83f613f-e583-4546-9752-8001b7146c61.png" width="650" height="450" alt="saas custom image"/>
 </p>
 
 - Αλέξανδρος Κουριδάκης
