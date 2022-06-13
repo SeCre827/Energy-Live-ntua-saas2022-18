@@ -40,7 +40,7 @@ exports.resetDB = () => {
         CountriesPair.bulkCreate(countriesPairsData.countries_pairs);
       })
       .then(() => {
-        console.log('Database reset completed successfully!')
+        console.log('Database reset completed successfully!');
       })
       .catch((err) => {
         console.log(err);
@@ -107,10 +107,6 @@ exports.getData = (req, res, next) => {
     });
 };
 
-exports.pog = (req, res, next) => {
-  res.send('Gamw thn mana sas');
-};
-
 // Controller for /update_data endpoint
 exports.updateData = async (req, res, next) => {
   try {
@@ -148,7 +144,6 @@ exports.updateData = async (req, res, next) => {
   }
 };
 
-
 exports.updateData2 = async (data) => {
   try {
     if (data === undefined) throw Error('No file provided');
@@ -169,7 +164,7 @@ exports.updateData2 = async (data) => {
         }
         let message = `${pfData.length} records where updated `;
         // console.log(message);
-      console.log(message);
+        console.log(message);
       })
       .catch((err) => {
         console.log(err);
