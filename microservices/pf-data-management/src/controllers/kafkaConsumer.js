@@ -1,7 +1,6 @@
 const { Kafka } = require('kafkajs');
-const controllers = require('./agptControllers');
+const controllers = require('./pfControllers');
 const { google } = require('googleapis');
-const produce = require('../utils/producer');
 
 async function initDrive() {
   // Google Service Account credentials file
@@ -34,33 +33,66 @@ async function downloadData(drive, fileId) {
   // Return JSON data as object
   return json.data;
 }
+
 const kafka = new Kafka({
   clientId: process.env.CLIENT_ID,
-  brokers: [process.env.KAFKA_URI], // [env.get("KAFKA_BOOTSTRAP_SERVER").required().asString()],
+  brokers: [process.env.KAFKA_URI],
 });
 
-const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
-
-const consumerUpdateData = async () => {
+kafkaController = async () => {
+  // Initialise Google Drive service
   const drive = await initDrive();
+
+  // Initialise a producer
+  const producer = kafka.producer();
+  await producer.connect();
+
+  // Initialise a consumer
+  const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
   await consumer.connect();
-  await consumer.subscribe({ topic: process.env.FETCH_TOPIC });
+  await consumer.subscribe({ 
+    topics: [
+      process.env.FETCH_TOPIC, 
+      process.env.RESET_TOPIC, 
+      process.env.STATUS_TOPIC
+    ] 
+  });
+
+  // Whenever an event is received by the consumer
   await consumer.run({
-    // this function is called every time the consumer gets a new message
-    eachMessage: async ({ message }) => {
-      // console.log(JSON.parse(message.value));
-      const id = JSON.parse(message.value).id;
-      console.log(id);
-      data = await downloadData(drive, id);
-      console.log(data.timestamp);
-      await controllers.updateData2(data);
-      produce(data.timestamp).catch((err) => {
-        console.error('error in producer: ', err);
-      });
-      // here, we just log the message to the standard output
-      console.log(`received message: ${message.value}`);
+    eachMessage: async ({ topic, message }) => {
+      // Check in which topic the received message belongs, then continue appropriately
+      if (topic === process.env.FETCH_TOPIC) {
+        // Download parsed file from Drive
+        const id = JSON.parse(message.value).id;
+        data = await downloadData(drive, id);
+
+        // Import data into database
+        await controllers.updateData2(data.countries_data);
+
+        // Publish a STORED_AGPT event
+        await producer.send({
+          topic: process.env.STORED_TOPIC,
+          messages: [{ key: '', value: JSON.stringify({timestamp: data.timestamp}) }],
+        });
+      } else if (topic === process.env.RESET_TOPIC) {
+        // Reset data in database
+        controllers.resetDB();
+
+        // Publish a RESET_RESPONSE event
+        await producer.send({
+          topic: process.env.RESET_RESPONSE_TOPIC,
+          messages: [{ key: '', value: JSON.stringify({name: 'pf-data-management'}) }],
+        });
+      } else if (topic === process.env.STATUS_TOPIC) {
+        // Publish a STATUS_RESPONSE event
+        await producer.send({
+          topic: process.env.STATUS_RESPONSE_TOPIC,
+          messages: [{ key: '', value: JSON.stringify({name: 'pf-data-management', status: 'OK'}) }],
+        });        
+      }
     },
   });
 };
 
-module.exports = consumerUpdateData;
+module.exports = kafkaController;

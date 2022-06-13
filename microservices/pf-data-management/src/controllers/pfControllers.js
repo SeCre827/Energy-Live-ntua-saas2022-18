@@ -21,8 +21,7 @@ const countryParamValidator = (countryString) => {
   return false;
 };
 
-// url /resetDB
-exports.resetDB = (req, res, next) => {
+exports.resetDB = () => {
   sequelize.sync({ force: true }).then((result) => {
     console.log('All tables were droped');
     let countriesData = JSON.parse(
@@ -41,23 +40,13 @@ exports.resetDB = (req, res, next) => {
         CountriesPair.bulkCreate(countriesPairsData.countries_pairs);
       })
       .then(() => {
-        res.status(200).json({
-          message: `Database reset completed successfully! `,
-        });
+        console.log('Database reset completed successfully!');
       })
       .catch((err) => {
         console.log(err);
       });
   });
 };
-
-// 
-// exports.getDataKafka = (req,res,next) =>{
-
-// }
-
-
-
 
 // url '/getData/:countryFrom/:countryTo/:dateFrom/:dateTo',
 exports.getData = (req, res, next) => {
@@ -118,10 +107,6 @@ exports.getData = (req, res, next) => {
     });
 };
 
-exports.pog = (req, res, next) => {
-  res.send('Gamw thn mana sas');
-};
-
 // Controller for /update_data endpoint
 exports.updateData = async (req, res, next) => {
   try {
@@ -159,7 +144,6 @@ exports.updateData = async (req, res, next) => {
   }
 };
 
-
 exports.updateData2 = async (data) => {
   try {
     if (data === undefined) throw Error('No file provided');
@@ -180,7 +164,7 @@ exports.updateData2 = async (data) => {
         }
         let message = `${pfData.length} records where updated `;
         // console.log(message);
-      console.log(message);
+        console.log(message);
       })
       .catch((err) => {
         console.log(err);
