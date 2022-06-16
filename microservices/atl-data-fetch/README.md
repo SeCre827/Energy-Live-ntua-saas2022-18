@@ -23,21 +23,6 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-<!--
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
--->
-
 ## Functionality
 
 This microservice subscribes to the ADMIN_FETCH topic of the Kafka Event Bus upon initialisation. Whenever the Admin Application publishes to that topic, this microservice downloads the current file corresponding to the "Actual Total Load" dataset, from the SFTP server. The file is then parsed, and a JSON containing only the required information is created. This JSON is finally uploaded to Google Drive. Upon successful upload, this microservice publishes a new message to the FETCHED_ATL topic, to notify the next microservice ("Actual Total Load" Data Management).

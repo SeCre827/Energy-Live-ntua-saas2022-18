@@ -5,9 +5,8 @@ const { writeFile } = require('fs/promises');
 function filterProperties(item) {
     return {
         country_ID:  item.MapCode,
-        timestamp: item.DateTime,
+        timestamp: DateTime.fromSQL(item.DateTime, { zone: 'utc' }).toISO(),
         production_type: item.ProductionType,
-        resolution_code: item.ResolutionCode,
         value: (item.ActualGenerationOutput || 0),
     };
 }

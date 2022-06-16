@@ -23,21 +23,6 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-<!--
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
--->
-
 ## Functionality
 
 This microservice subscribes to the STORED_{ATL, AGPT, PF} topics upon initialisation. Whenever one of the {ATL, AGPT, PF} Data Management microservices publishes to the corresponding topic, this microservice updates the locally stored timestamp of the last import of data of the corresponding dataset.

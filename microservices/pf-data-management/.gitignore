@@ -1,5 +1,4 @@
-/dist
-/src/node_modules
+/node_modules
 /src/dataHelpers
 /vpp
 # Logs
@@ -37,5 +36,4 @@ lerna-debug.log*
 /src/credentials.json
 
 # Environment variables
-
-/node_modules
+.env
