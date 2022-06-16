@@ -63,3 +63,7 @@ a:hover {
   color: white;
   background-color: #052e34;
 }
+
+.sign-in {
+  align-self: center;
+}
