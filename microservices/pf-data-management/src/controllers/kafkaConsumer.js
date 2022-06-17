@@ -68,7 +68,7 @@ kafkaController = async () => {
         data = await downloadData(drive, id);
 
         // Import data into database
-        await controllers.updateData2(data.countries_data);
+        await controllers.updateData2(data);
 
         // Publish a STORED_AGPT event
         await producer.send({

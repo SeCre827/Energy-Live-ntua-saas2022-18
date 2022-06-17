@@ -37,3 +37,6 @@ lerna-debug.log*
 
 # Environment variables
 .env
+
+# Drive credentials
+credentials.json

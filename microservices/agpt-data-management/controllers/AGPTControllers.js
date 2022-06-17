@@ -8,6 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const { Op } = require('sequelize');
 const CountryProduction = require('../models/countryProduction');
+const fillMissingData = require('../utils/fillMissingData.js');
 
 const checkCountryID = (countryString) => {
     return (countryString.length === 2) && (/^[A-Z]{2}$/.test(countryString));
@@ -34,22 +35,25 @@ exports.getData = (req, res, next) => {
             timestamp: { [Op.between]: [dateFrom, dateTo] },
         },
     }).then((agpt) => {
+
         if (!agpt.length) {
             const error = new Error('No data available.');
             return next(error);
         }
-        const new_data = {
-            country_ID: countryID,
-            production_type: prodType,
-            entries: [],
+        const fetched = {
+            countryId: countryID,
+            productionType: prodType,
+            dateFrom: dateFrom,
+            dateTo: dateTo,
+            timestamp: DateTime.now().toISO(),
+            data: agpt.map(
+                (entry) => ({
+                    timestamp: entry.timestamp,
+                    value: entry.value
+                })
+            ),
         };
-        for (const item of agpt) {
-            new_data.entries.push({
-                timestamp: item.timestamp,
-                value: item.value,
-            });
-        }
-        res.status(200).json(new_data);
+        res.status(200).json(fetched);
     }).catch((err) => {
         console.log('Error handler AGPTController');
         console.log(err);
@@ -58,7 +62,8 @@ exports.getData = (req, res, next) => {
 
 exports.importData = async (data) => {
     try {
-        AggrGenerationPerType.bulkCreate(data, { updateOnDuplicate: ['value'] })
+        new_data = await fillMissingData(data);
+        await AggrGenerationPerType.bulkCreate(new_data, { updateOnDuplicate: ['value'] })
             .then((agpt) => {
                 if (!agpt) {
                     const error = new Error('Error, data was not updated.');
