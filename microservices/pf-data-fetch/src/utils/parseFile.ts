@@ -36,7 +36,7 @@ export async function parseFile(instream: Readable) {
   };
 
   // Initialise the last timestamp found
-  let timestamp = DateTime.fromMillis(0);
+  let lastTimestamp = DateTime.fromMillis(0);
 
   // Determine the Parser's behaviour
   parser.on('readable', () => {
@@ -50,16 +50,18 @@ export async function parseFile(instream: Readable) {
       }
 
       // Create a new entry in the countries_pair_data array of dataDto
+      const currTimestamp = DateTime.fromSQL(entry.DateTime, {
+        zone: 'utc',
+      });
       dataDto.countries_pairs_data.push({
         countries_pair: entry.OutMapCode + '_' + entry.InMapCode,
-        timestamp: entry.DateTime,
+        timestamp: currTimestamp.toISO(),
         value: entry.FlowValue,
       });
 
       // Update the last timestamp found
-      const curr = DateTime.fromSQL(entry.DateTime, { zone: 'utc' });
-      if (timestamp < curr) {
-        timestamp = curr;
+      if (lastTimestamp < currTimestamp) {
+        lastTimestamp = currTimestamp;
       }
     }
   });
@@ -68,6 +70,6 @@ export async function parseFile(instream: Readable) {
   await finished(parser);
 
   // Set the dataDto object's timestamp to the latest found, then return it
-  dataDto.timestamp = timestamp.toISO();
+  dataDto.timestamp = lastTimestamp.toISO();
   return dataDto;
 }

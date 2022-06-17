@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 //                               database, username , password
-const sequelize = new Sequelize('pf-data-management-db', 'postgres', 'root', {
+const sequelize = new Sequelize('pf_data', 'admin', 'password', {
   host: 'localhost',
   dialect: 'postgres',
   logging: false,

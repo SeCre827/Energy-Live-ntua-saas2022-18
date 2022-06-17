@@ -17,6 +17,7 @@ async function bootstrap() {
     },
   });
   await app.startAllMicroservices();
+  app.enableCors();
   await app.listen(process.env.PORT);
 }
 bootstrap();

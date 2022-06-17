@@ -76,9 +76,9 @@ sequelize
     // Connection established now create counties
     // if flag = true -> write over the database, if flag = false -> do not write over
     if (flag) {
-      let countriesData = JSON.parse(fs.readFileSync('./utils/countries.json'));
+      let countriesData = JSON.parse(fs.readFileSync('./src/utils/countries.json'));
       let countriesPairsData = JSON.parse(
-        fs.readFileSync('./utils/countriesPairs.json')
+        fs.readFileSync('./src/utils/countriesPairs.json')
       );
 
       Country.bulkCreate(countriesData.countriesdata)

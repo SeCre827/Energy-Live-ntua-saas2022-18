@@ -10,6 +10,7 @@ const PhysicalFlow = require('../models/physicalFlow');
 const ResolutionCode = require('../models/resolutionCode');
 
 const { Op } = require('sequelize');
+const fillMissingData = require('../utils/fillMissingData');
 
 // Checks is 2 char aplharithetic is valid
 const countryParamValidator = (countryString) => {
@@ -54,13 +55,13 @@ exports.getData = (req, res, next) => {
   let countryTo = req.params.countryTo;
   // let dateFrom = req.params.dateFrom;
   // let dateFrom = req.params.dateFrom;
-  let dateFrom = DateTime.fromSQL(req.params.dateFrom, {
+  let dateFrom = DateTime.fromISO(req.params.dateFrom, {
     zone: 'utc',
-  }).toISO();
-  let dateTo = DateTime.fromSQL(req.params.dateTo, {
+  }).startOf('day').toISO();
+  let dateTo = DateTime.fromISO(req.params.dateTo, {
     zone: 'utc',
-  }).toISO();
-  // console.log(countryFrom, countryTo, dateFrom, dateTo);
+  }).endOf('day').toISO();
+  console.log(countryFrom, countryTo, dateFrom, dateTo);
   // validation for the countries param
   if (
     !countryParamValidator(countryFrom) ||
@@ -75,7 +76,6 @@ exports.getData = (req, res, next) => {
   // validation for date params
 
   // query
-  // kati ginetai me ta time zones
   PhysicalFlow.findAll({
     where: {
       countries_pair: countryFrom + '_' + countryTo,
@@ -83,6 +83,7 @@ exports.getData = (req, res, next) => {
         [Op.between]: [dateFrom, dateTo],
       },
     },
+    order: [['timestamp', 'ASC']]
   })
     .then((physicalFlows) => {
       if (!physicalFlows.length) {
@@ -90,15 +91,18 @@ exports.getData = (req, res, next) => {
         error.httpStatusCode = 422;
         return next(error);
       }
-      let physicalFlowsObjectsArray = JSON.stringify(physicalFlows, null, 2);
-      console.log(physicalFlowsObjectsArray);
-      let totalValue = 0;
-      for (const entry of physicalFlows) {
-        console.log(entry.value);
-        totalValue += parseFloat(entry.value);
-      }
       res.status(200).json({
-        message: `The total physical flow value is ${totalValue}`,
+        countryFrom: countryFrom,
+        countryTo: countryTo,
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+        timestamp: DateTime.now().toISO(),
+        data: physicalFlows.map(
+          (entry) => ({
+            timestamp: entry.timestamp,
+            value: entry.value
+          })
+        )
       });
     })
     .catch((err) => {
@@ -146,15 +150,16 @@ exports.updateData = async (req, res, next) => {
 
 exports.updateData2 = async (data) => {
   try {
-    if (data === undefined) throw Error('No file provided');
+    if (data === undefined) throw Error('No data provided');
     // const file = req.file; // raw data = file.buffer
     // const data = JSON.parse(file.buffer); // Data in js object notation we will need the countries_pair_data property.
 
-    PhysicalFlow.bulkCreate(data.countries_pairs_data, {
+    const new_data = await fillMissingData(data.countries_pairs_data);
+
+    PhysicalFlow.bulkCreate(new_data, {
       // ignoreDuplicates: true,
       updateOnDuplicate: ['value'],
-    })
-      .then((pfData) => {
+    }).then((pfData) => {
         if (!pfData) {
           const error = new Error(
             'No data was updated. Check the file you provided!'

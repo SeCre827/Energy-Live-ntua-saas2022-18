@@ -25,7 +25,7 @@ ProductionTypes.hasMany(CountryProduction, {
     onDelete: 'SET NULL',
 });
 
-const forcesync = false;
+const forcesync = true;
 
 sequelize
     .sync({ force: forcesync })
