@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import chartdata from "./chartdata.json";
 require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data')(Highcharts);
 
@@ -9,6 +10,10 @@ require('highcharts/modules/export-data')(Highcharts);
 
 const Chart = (props) => {
   const chart = useRef();
+
+  console.log("chart", props.chartData)
+
+  const finaldata = props.chartData ? props.chartData.data.map((row) => [row.timestamp, parseFloat(row.value)]) : [];
 
   useEffect(() => {
     props.giveRef(chart);
@@ -23,32 +28,26 @@ const Chart = (props) => {
     },
     series: [
       {
-        data: [1, 2, 1, 4, 3, 6, 123, 412, 5, 214, 123, 61, 123],
+        data: finaldata,
       },
-    ],
+    ]
   };
 
   return (
     <div>
+    {props.chartData ? (
       <HighchartsReact
         ref={chart}
         highcharts={Highcharts}
         //   constructorType={'stockChart'}
         options={options}
       />
-    </div>
+     ) : (
+      <h2>No data found</h2>
+    )
+  }
+  </div>
   );
 };
 
 export default Chart;
-
-//   const options = {
-//     title: {
-//       text: 'My stock chart',
-//     },
-//     series: [
-//       {
-//         data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9],
-//       },
-//     ],
-//   };

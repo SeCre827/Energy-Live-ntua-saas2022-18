@@ -5,7 +5,7 @@ import classes from './MainContent.module.css';
 import jwt_decode from 'jwt-decode';
 import { DateTime } from 'luxon';
 
-const MainContent = ({ token, setLoginData }) => {
+const MainContent = ({ token, setLoginData, chartData, latest }) => {
   const decodedToken = jwt_decode(token);
 
   let daysLeft = DateTime.fromISO(decodedToken.licence_expiration)
@@ -33,6 +33,7 @@ const MainContent = ({ token, setLoginData }) => {
       console.log(e);
     }
   };
+
   let chart;
   const refHandler = (ref) => {
     chart = ref;
@@ -69,9 +70,9 @@ const MainContent = ({ token, setLoginData }) => {
           <span>#country</span>
         </div>
         <div className={classes.chart}>
-          <Chart giveRef={refHandler} />
+          <Chart giveRef={refHandler} chartData={chartData}/>
         </div>
-        <h2 className={classes.lastUpdate}> #Latest update</h2>
+        <h2 className={classes.lastUpdate}> { `#Latest update at ${latest ? latest.latest_timestamp : ""}`}</h2>
         <div className={classes.helperDiv}>
           <div className={classes.chartButtons}>
             <button onClick={downloadImage}> Download Image</button>
