@@ -4,33 +4,31 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
 import countries from './countries';
 import generationTypes from './generationTypes';
+import { nowDateFormatter } from './nowFormatter'
 
 const override = css`
   display: block;
   margin: 0 auto;
 `;
 
-const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-
-const SideDrawer = ({ agptRefetch, loading, isError, error }) => {
-
-  const now = new Date();
-  const nowFormatted = `${now.getFullYear()}-${months[now.getMonth()]}-${now.getDate()}`;
+const SideDrawer = ({ loading, isError, error, setQueryParams }) => {
 
   const [countryA, setCountryA] = useState('AM');
   const [countryB, setCountryB] = useState('AZ');
-  const [date, setDate] = useState(nowFormatted);
+  const [dateFrom, setDateFrom] = useState(nowDateFormatter());
   const [generationType, setGenerationType] = useState('Biomass');
-  const [quantity, setQuantity] = useState('actualTotalLoad');
+  const [quantity, setQuantity] = useState('atl');
 
   function submitHandler(event) {
     event.preventDefault();
     console.log("submitted");
     console.log(countryA);
     console.log(countryB);
-    console.log(date.replace(/-/g, ""));
+    console.log(dateFrom.replace(/-/g, ""));
     console.log(generationType);
     console.log(quantity);
+
+    setQueryParams({countryA, countryB, dateFrom: dateFrom.replace(/-/g, ""), generationType, quantity})
   }
 
   return (
@@ -41,13 +39,13 @@ const SideDrawer = ({ agptRefetch, loading, isError, error }) => {
         <div className={classes.picker}>
           <input
             className={classes.inputs}
-            onChange={(e) => setDate(e.target.value)}
+            onChange={(e) => setDateFrom(e.target.value)}
             type='date'
             id='start-date'
             name='start-date'
-            max={nowFormatted}
+            max={nowDateFormatter()}
             min='2016-01-01'
-            value={date}
+            value={dateFrom}
           />
         </div>
         <form onSubmit={submitHandler} className={classes.form1}>
@@ -61,9 +59,9 @@ const SideDrawer = ({ agptRefetch, loading, isError, error }) => {
                 id='quantity'
                 onChange={(e) => setQuantity(e.target.value)}
               >
-                <option key='actualTotalLoad' value='actualTotalLoad'>Actual total Load</option>
-                <option key='generationPerType' value='generationPerType'>Generation Per Type</option>
-                <option key='crossBorderFlows' value='crossBorderFlows'>Cross border flows</option>
+                <option key='atl' value='atl'>Actual total Load</option>
+                <option key='agpt' value='agpt'>Generation Per Type</option>
+                <option key='pf' value='pf'>Cross border flows</option>
               </select>
 
               <br></br>
@@ -86,9 +84,9 @@ const SideDrawer = ({ agptRefetch, loading, isError, error }) => {
                 <br></br>
                 <br></br>
               </div>
-            {quantity === 'generationPerType' && (
+            {quantity === 'agpt' && (
               <div>
-                <label htmlFor='generationType'>Generation Type:</label>
+                <label htmlFor='agpt'>Generation Type:</label>
                 <br></br>
                 <select
                   className={classes.inputs}
@@ -101,7 +99,7 @@ const SideDrawer = ({ agptRefetch, loading, isError, error }) => {
                 </select>
               </div>
             )}
-            {quantity === 'crossBorderFlows' && (
+            {quantity === 'pf' && (
               <div>
               <label htmlFor='countryTo'>Country (to):</label>
               <br></br>
@@ -123,7 +121,7 @@ const SideDrawer = ({ agptRefetch, loading, isError, error }) => {
               isError ? 
               (<h2>{error.message}</h2>) : (
                 
-                  <button onClick={agptRefetch}>Refresh</button>
+                  <button onClick={submitHandler}>Refresh</button>
               )
             )
           }

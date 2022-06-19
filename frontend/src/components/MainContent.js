@@ -5,7 +5,7 @@ import classes from './MainContent.module.css';
 import jwt_decode from 'jwt-decode';
 import { DateTime } from 'luxon';
 
-const MainContent = ({ token, setLoginData, chartData, latest }) => {
+const MainContent = ({ token, setLoginData, chartData, latest, description }) => {
   const decodedToken = jwt_decode(token);
 
   let daysLeft = DateTime.fromISO(decodedToken.licence_expiration)
@@ -66,13 +66,14 @@ const MainContent = ({ token, setLoginData, chartData, latest }) => {
       </div>
       <div className={classes.infoDiv}>
         <div className={classes.loadAndCountry}>
-          <span>#Actual total Load</span>
-          <span>#country</span>
+          <span>{description[0]}</span>
+          <span>{description[1]}</span>
+          <span>{description[2]}</span>
         </div>
         <div className={classes.chart}>
           <Chart giveRef={refHandler} chartData={chartData}/>
         </div>
-        <h2 className={classes.lastUpdate}> { `#Latest update at ${latest ? latest.latest_timestamp : ""}`}</h2>
+        <h2 className={classes.lastUpdate}> { `Latest update: ${latest ? new Date(latest.latest_timestamp) : ""}`}</h2>
         <div className={classes.helperDiv}>
           <div className={classes.chartButtons}>
             <button onClick={downloadImage}> Download Image</button>

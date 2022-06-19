@@ -1,19 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import chartdata from "./chartdata.json";
+import highchartsAccessibility from "highcharts/modules/accessibility";
 require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data')(Highcharts);
 
 // import HC_exporting from 'highcharts/modules/exporting';
 // HC_exporting(Highcharts);
 
+highchartsAccessibility(Highcharts);
+
 const Chart = (props) => {
   const chart = useRef();
-
-  console.log("chart", props.chartData)
-
-  const finaldata = props.chartData ? props.chartData.data.map((row) => [row.timestamp, parseFloat(row.value)]) : [];
 
   useEffect(() => {
     props.giveRef(chart);
@@ -24,11 +22,17 @@ const Chart = (props) => {
       type: 'spline',
     },
     title: {
-      text: 'My chart',
+      text: 'Results',
     },
+    turboThreshold: 0,
     series: [
       {
-        data: finaldata,
+        turboThreshold: 5000,
+        marker: {
+          enabled: false
+        },
+        name: "value",
+        data: props.chartData ? props.chartData : [],
       },
     ]
   };

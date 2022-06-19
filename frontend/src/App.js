@@ -7,7 +7,7 @@ import About from './pages/About';
 import Plans from './pages/Plans';
 import Legal from './pages/Legal';
 import NotFound from './pages/NotFound';
-import useToken from './useToken';
+import useToken from './hooks/useToken';
 import jwt_decode from 'jwt-decode';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
