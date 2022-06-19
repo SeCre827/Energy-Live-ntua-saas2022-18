@@ -86,14 +86,9 @@ exports.getData = (req, res, next) => {
     order: [['timestamp', 'ASC']]
   })
     .then((physicalFlows) => {
-      if (!physicalFlows.length) {
-        const error = new Error('No data was found.');
-        error.httpStatusCode = 422;
-        return next(error);
-      }
       res.status(200).json({
-        countryFrom: countryFrom,
-        countryTo: countryTo,
+        countryIn: countryFrom,
+        countryOut: countryTo,
         dateFrom: dateFrom,
         dateTo: dateTo,
         timestamp: DateTime.now().toISO(),
@@ -160,13 +155,6 @@ exports.updateData2 = async (data) => {
       // ignoreDuplicates: true,
       updateOnDuplicate: ['value'],
     }).then((pfData) => {
-        if (!pfData) {
-          const error = new Error(
-            'No data was updated. Check the file you provided!'
-          );
-          error.httpStatusCode = 422;
-          throw error;
-        }
         let message = `${pfData.length} records where updated `;
         // console.log(message);
         console.log(message);

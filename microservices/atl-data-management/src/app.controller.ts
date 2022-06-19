@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { Params } from './input/params.input';
 import { EventPattern } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
+import { messageLog } from './utils/messageLog';
 
 @Controller()
 export class AppController {
@@ -14,18 +15,22 @@ export class AppController {
     return this.appService.getData(params);
   }
 
-  @EventPattern(process.env.FETCHED_DATA_TOPIC)
-  async importData(file: { value: { id: string } }) {
-    await this.appService.importData(file.value.id);
+  @EventPattern(process.env.FETCHED_TOPIC)
+  async importData(message: { value: { dataset: string; file_id: string } }) {
+    if (message.value.dataset === 'ATL') {
+      messageLog('Received FETCHED event');
+      await this.appService.importData(message.value.file_id);
+    }
   }
 
-  @EventPattern(process.env.RESET_TOPIC)
-  async reset() {
-    await this.appService.reset();
-  }
-
-  @EventPattern(process.env.STATUS_TOPIC)
-  status() {
-    this.appService.status();
+  @EventPattern(process.env.ADMIN_TOPIC)
+  async adminOperation(message: { value: { operation: string } }) {
+    if (message.value.operation === 'RESET') {
+      messageLog('Received RESET event');
+      await this.appService.reset();
+    } else if (message.value.operation === 'STATUS') {
+      messageLog('Received STATUS event');
+      this.appService.status();
+    }
   }
 }

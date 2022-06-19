@@ -12,7 +12,13 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         options: {
           client: {
             clientId: process.env.CLIENT_ID,
-            brokers: [process.env.KAFKA_URI],
+            brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
+            ssl: true,
+            sasl: {
+              mechanism: 'scram-sha-256',
+              username: process.env.CLOUDKARAFKA_USERNAME,
+              password: process.env.CLOUDKARAFKA_PASSWORD,
+            },
           },
         },
       },

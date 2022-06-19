@@ -37,8 +37,8 @@ lerna-debug.log*
 # TypeORM configuration
 ormconfig.json
 
+# Google service account credentials
+credentials.json
+
 # Environment variables
 .env
-
-# Google Service Account credentials
-credentials.json

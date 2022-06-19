@@ -1,6 +1,7 @@
 /node_modules
-/src/dataHelpers
-/vpp
+csvScripts
+images
+
 # Logs
 logs
 *.log
@@ -32,11 +33,11 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-#  
-/src/credentials.json
+
+# Google service account credentials
+credentials.json
 
 # Environment variables
 .env
 
-# Drive credentials
-credentials.json
+

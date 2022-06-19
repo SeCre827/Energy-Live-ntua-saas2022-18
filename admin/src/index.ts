@@ -12,9 +12,15 @@ import { deleteUploaded } from './deleteUploaded';
  * APACHE KAFKA CONFIGURATION
  */
 
-const kafka = new Kafka({
+ const kafka = new Kafka({
   clientId: process.env.CLIENT_ID,
-  brokers: [process.env.KAFKA_URI],
+  brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
+  ssl: true,
+  sasl: {
+    mechanism: 'scram-sha-256',
+    username: process.env.CLOUDKARAFKA_USERNAME,
+    password: process.env.CLOUDKARAFKA_PASSWORD,
+  },
 });
 
 const producer = kafka.producer();
@@ -23,18 +29,18 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
 const errorTypes = ['unhandledRejection', 'uncaughtException'];
 const signalTraps = ['SIGTERM', 'SIGINT', 'SIGUSR2'];
 
-errorTypes.forEach(type => {
-  process.on(type, async () => {
-    try {
-      console.log(`process.on ${type}`);
-      await producer.disconnect();
-      await consumer.disconnect();
-      process.exit(0);
-    } catch (_) {
-      process.exit(1);
-    }
-  })
-});
+// errorTypes.forEach(type => {
+//   process.on(type, async () => {
+//     try {
+//       console.log(`process.on ${type}`);
+//       await producer.disconnect();
+//       await consumer.disconnect();
+//       process.exit(0);
+//     } catch (_) {
+//       process.exit(1);
+//     }
+//   })
+// });
 
 signalTraps.forEach(type => {
   process.once(type, async () => {
@@ -69,7 +75,7 @@ const drive = google.drive({
   auth: auth,
 });
 
-async function main() {  
+async function main() { 
   switch(process.argv[2]) {
     case 'update_files':
       await updateFiles(drive); break;

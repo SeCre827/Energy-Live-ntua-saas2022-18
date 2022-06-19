@@ -7,7 +7,16 @@ import { JwtStrategy } from './auth/jwtStrategy';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(), // Load TypeORM configuration from file
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      synchronize: false,
+      logging: false,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    }),
     ClientsModule.register([
       {
         name: 'KAFKA',
@@ -15,7 +24,13 @@ import { JwtStrategy } from './auth/jwtStrategy';
         options: {
           client: {
             clientId: process.env.CLIENT_ID,
-            brokers: [process.env.KAFKA_URI],
+            brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
+            ssl: true,
+            sasl: {
+              mechanism: 'scram-sha-256',
+              username: process.env.CLOUDKARAFKA_USERNAME,
+              password: process.env.CLOUDKARAFKA_PASSWORD,
+            },
           },
         },
       },

@@ -13,6 +13,7 @@ import { readFile } from 'fs/promises';
 import { zeroPad } from './utils/zeroPad';
 import { validateParams } from './utils/validateParams';
 import { DateTime } from 'luxon';
+import { messageLog } from './utils/messageLog';
 
 @Injectable()
 export class AppService {
@@ -50,10 +51,13 @@ export class AppService {
     // Store data in database
     await storeData(data, this.manager);
 
-    // Publish IMPORTED_DATA event
-    this.client.emit(process.env.IMPORTED_DATA_TOPIC, {
+    // Publish STORED event
+    this.client.emit(process.env.STORED_TOPIC, {
+      dataset: 'ATL',
       timestamp: data.timestamp,
     });
+
+    messageLog('Stored fetched entries into the database');
   }
 
   async reset() {
@@ -68,15 +72,16 @@ export class AppService {
       await manager.insert(Country, countries);
     });
 
-    // Publish RESET_DONE event
-    this.client.emit(process.env.RESET_DONE_TOPIC, {
+    // Publish ADMIN_RESPONSE event
+    this.client.emit(process.env.ADMIN_RESPONSE_TOPIC, {
       name: 'atl-data-management',
+      reset: 'OK',
     });
   }
 
   status() {
-    // Publish STATUS_RESPONSE event
-    this.client.emit(process.env.STATUS_RESPONSE_TOPIC, {
+    // Publish ADMIN_RESPONSE event
+    this.client.emit(process.env.ADMIN_RESPONSE_TOPIC, {
       name: 'atl-data-management',
       status: 'OK',
     });

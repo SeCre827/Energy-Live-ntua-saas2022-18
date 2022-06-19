@@ -34,7 +34,7 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Google Service Account credentials
+# Google service account credentials
 credentials.json
 
 # Environment variables

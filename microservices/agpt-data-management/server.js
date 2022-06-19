@@ -1,3 +1,4 @@
+require('dotenv').config();
 const app = require("./app");
 const Countries = require('./models/countries');
 const ProductionTypes = require('./models/productiontypes');
@@ -25,7 +26,7 @@ ProductionTypes.hasMany(CountryProduction, {
     onDelete: 'SET NULL',
 });
 
-const forcesync = true;
+const forcesync = false;
 
 sequelize
     .sync({ force: forcesync })
@@ -61,9 +62,7 @@ sequelize
                     console.log(err);
                 });
         }
-        console.log('Server listening on port 4009');
-
-        app.listen(4009);
+        app.listen(process.env.PORT);
     })
     .catch((error) => {
         console.log('From error logger at app: ', error.message);

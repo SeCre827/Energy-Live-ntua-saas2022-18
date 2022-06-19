@@ -49,7 +49,7 @@ CountriesPair.hasMany(PhysicalFlow, {
 //
 
 // kafka
-const consumer = require('./controllers/kafkaConsumer');
+const consumer = require('./controllers/kafkaController');
 consumer().catch((err) => {
   console.error('error in consumer: ', err);
 });
@@ -98,9 +98,7 @@ sequelize
           console.log('err');
         });
     }
-    console.log('Server Listening  on Port 8080');
-
-    app.listen(8080);
+    app.listen(process.env.PORT);
   })
   .catch((error) => {
     console.log('From error Logger at app: ', error.message);

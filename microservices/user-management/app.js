@@ -11,7 +11,6 @@ const sequelize = require('./utils/database');
 
 dotenv.config();
 
-const port = 5000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -61,11 +60,9 @@ app.use((error, req, res) => {
 });
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
-    console.log('Succesfully conected to DB');
-    console.log(`Server Listening  on Port: ${port}`);
-    app.listen(port);
+    app.listen(process.env.PORT);
   })
   .catch((error) => {
     console.log('From error Logger at app: ', error.message);

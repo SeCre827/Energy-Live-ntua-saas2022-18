@@ -36,7 +36,13 @@ async function downloadData(drive, fileId) {
 
 const kafka = new Kafka({
   clientId: process.env.CLIENT_ID,
-  brokers: [process.env.KAFKA_URI],
+  brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
+  ssl: true,
+  sasl: {
+    mechanism: 'scram-sha-256',
+    username: process.env.CLOUDKARAFKA_USERNAME,
+    password: process.env.CLOUDKARAFKA_PASSWORD,
+  },
 });
 
 exports.kafkaController = async () => {
@@ -53,43 +59,66 @@ exports.kafkaController = async () => {
   await consumer.subscribe({ 
     topics: [
       process.env.FETCHED_TOPIC, 
-      process.env.RESET_TOPIC, 
-      process.env.STATUS_TOPIC
+      process.env.ADMIN_TOPIC,
     ] 
   });
 
   // Whenever an event is received by the consumer
   await consumer.run({
     eachMessage: async ({ topic, message }) => {
-      // Check in which topic the received message belongs, then continue appropriately
-      if (topic === process.env.FETCHED_TOPIC) {
+      // Check the topic and message of the event, then continue accordingly if
+      // the event is relevant to this microservice
+      const value = JSON.parse(message.value);
+
+      if (topic === process.env.FETCHED_TOPIC && value.dataset === 'AGPT') {
+
         // Download parsed file from Drive
-        const id = JSON.parse(message.value).id;
+        const id = value.file_id;
         data = await downloadData(drive, id);
 
         // Import data into database
         await controllers.importData(data.countries_data);
 
-        // Publish a STORED_AGPT event
+        // Publish a STORED event
         await producer.send({
           topic: process.env.STORED_TOPIC,
-          messages: [{ key: '', value: JSON.stringify({timestamp: data.timestamp}) }],
+          messages: [{
+            key: '', 
+            value: JSON.stringify({
+              dataset: 'AGPT', 
+              timestamp: data.timestamp
+            })
+          }],
         });
-      } else if (topic === process.env.RESET_TOPIC) {
-        // Reset data in database
-        controllers.resetData();
-
-        // Publish a RESET_RESPONSE event
-        await producer.send({
-          topic: process.env.RESET_RESPONSE_TOPIC,
-          messages: [{ key: '', value: JSON.stringify({name: 'agpt-data-management'}) }],
-        });
-      } else if (topic === process.env.STATUS_TOPIC) {
-        // Publish a STATUS_RESPONSE event
-        await producer.send({
-          topic: process.env.STATUS_RESPONSE_TOPIC,
-          messages: [{ key: '', value: JSON.stringify({name: 'agpt-data-management', status: 'OK'}) }],
-        });        
+      } else if (topic === process.env.ADMIN_TOPIC) {
+        if (value.operation === 'RESET') {
+          // Reset data in database
+          controllers.resetData();
+  
+          // Publish an ADMIN_RESPONSE event
+          await producer.send({
+            topic: process.env.ADMIN_RESPONSE_TOPIC,
+            messages: [{ 
+              key: '', 
+              value: JSON.stringify({
+                name: 'agpt-data-management',
+                reset: 'OK'
+              })
+            }],
+          });
+        } else if (value.operation === 'STATUS') {
+          // Publish an ADMIN_RESPONSE event
+          await producer.send({
+            topic: process.env.ADMIN_RESPONSE_TOPIC,
+            messages: [{ 
+              key: '', 
+              value: JSON.stringify({
+                name: 'agpt-data-management', 
+                status: 'OK'
+              }) 
+            }],
+          });        
+        }
       }
     },
   });

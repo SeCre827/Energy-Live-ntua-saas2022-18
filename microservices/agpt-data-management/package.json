@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js "
+    "start": "nodemon server.js ",
+    "start:prod": "node --optimize_for_size --max_old_space_size=460 server.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

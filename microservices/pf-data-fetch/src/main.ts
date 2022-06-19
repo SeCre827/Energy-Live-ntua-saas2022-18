@@ -4,20 +4,26 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,
-    {
-      transport: Transport.KAFKA,
-      options: {
-        client: {
-          brokers: [process.env.KAFKA_URI],
-        },
-        consumer: {
-          groupId: process.env.GROUP_ID,
+  const app = await NestFactory.create(AppModule);
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.KAFKA,
+    options: {
+      client: {
+        clientId: process.env.CLIENT_ID,
+        brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
+        ssl: true,
+        sasl: {
+          mechanism: 'scram-sha-256',
+          username: process.env.CLOUDKARAFKA_USERNAME,
+          password: process.env.CLOUDKARAFKA_PASSWORD,
         },
       },
+      consumer: {
+        groupId: process.env.GROUP_ID,
+      },
     },
-  );
-  app.listen();
+  });
+  await app.startAllMicroservices();
+  app.listen(process.env.PORT);
 }
 bootstrap();

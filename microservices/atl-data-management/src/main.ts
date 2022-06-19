@@ -9,7 +9,14 @@ async function bootstrap() {
     transport: Transport.KAFKA,
     options: {
       client: {
-        brokers: [process.env.KAFKA_URI],
+        clientId: process.env.CLIENT_ID,
+        brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
+        ssl: true,
+        sasl: {
+          mechanism: 'scram-sha-256',
+          username: process.env.CLOUDKARAFKA_USERNAME,
+          password: process.env.CLOUDKARAFKA_PASSWORD,
+        },
       },
       consumer: {
         groupId: process.env.GROUP_ID,
