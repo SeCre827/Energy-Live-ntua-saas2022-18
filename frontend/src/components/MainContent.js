@@ -14,7 +14,7 @@ const MainContent = ({ token, setLoginData, chartData, latest, description }) =>
 
   const doLogout = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/signout`, {
+      const res = await fetch(`https://saas-22-18-user-mgmt.herokuapp.com/signout`, {
         method: 'post',
         mode: 'cors',
         headers: {
@@ -28,6 +28,7 @@ const MainContent = ({ token, setLoginData, chartData, latest, description }) =>
         setLoginData(undefined);
         console.log('remove from storage');
         localStorage.removeItem('token');
+        window.location.reload(true)
       }
     } catch (e) {
       console.log(e);
@@ -59,7 +60,7 @@ const MainContent = ({ token, setLoginData, chartData, latest, description }) =>
     <div className={classes.mainDiv}>
       <div className={classes.info}>
         <span> {decodedToken.email}</span>
-        <Link to='/welcome' onClick={doLogout}>
+        <Link to='/' onClick={doLogout}>
           {' '}
           Sign out{' '}
         </Link>

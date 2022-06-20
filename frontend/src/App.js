@@ -38,6 +38,10 @@ function App() {
     };
   }, [token, setToken]);
 
+  const isValid = (tkn) => {
+    return tkn.licence_expiration !== null;
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
         <Routes>
@@ -45,13 +49,16 @@ function App() {
             path='/'
             element={
               token ? (
-                <Main token={token} setLoginData={setToken} />
+                isValid(jwt_decode(token)) ? (
+                  <Main token={token} setLoginData={setToken} />
+                ) : (
+                  <ExtendPlan token={token} setLoginData={setToken} />
+                )
               ) : (
                 <Welcome setLoginData={setToken} />
               )
             }
           />
-          <Route path='/welcome' element={<Welcome setLoginData={setToken} />} />
           <Route
             path='/extend-plan'
             element={

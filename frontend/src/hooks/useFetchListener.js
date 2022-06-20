@@ -4,7 +4,7 @@ import axios from 'axios';
 export const useFetchListener = (onSuccess, onError, token, dataset) => {
 
     const fetchListener = () => {
-        return axios.get(`http://localhost:4005/${dataset}-latest`, {
+        return axios.get(`https://saas-22-18-frontend-listener.herokuapp.com/${dataset}-latest`, {
           headers: {
             Authorization: 'Bearer ' + token
           }

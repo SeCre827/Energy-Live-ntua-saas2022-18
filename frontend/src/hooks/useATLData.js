@@ -5,7 +5,7 @@ import { nowRequestFormatter } from '../components/nowFormatter'
 export const useATLData = (onSuccess, onError, token, dateFrom, country) => {
 
     const fetchATL = () => {
-        return axios.get(`http://localhost:4002/getData/${country}/${dateFrom}/${nowRequestFormatter()}`, {
+        return axios.get(`https://saas-22-18-atl-data-mgmt.herokuapp.com/getData/${country}/${dateFrom}/${nowRequestFormatter()}`, {
           headers: {
             Authorization: 'Bearer ' + token
           }
