@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom';
 const ExtendPlan = ({ token, setLoginData }) => {
   const navigate = useNavigate();
   const decodedToken = jwt_decode(token);
-  console.log(decodedToken);
+
   const [Email, setEmail] = useState(decodedToken.email);
-  const [emailIsValid, setEmailIsValid] = useState();
+  const [emailIsValid, setEmailIsValid] = useState(true);
   const [FirstName, setFirstName] = useState(decodedToken.first_name);
   const [LastName, setLastName] = useState(
     decodedToken.last_name || 'Not provided'
@@ -107,7 +107,7 @@ const ExtendPlan = ({ token, setLoginData }) => {
               readOnly
               value={Email}
               onChange={emailChangeHandler}
-              onBlur={validateEmailHandler}
+              onMouseLeave={validateEmailHandler}
             />
           </div>
           <div className={classes.control}>

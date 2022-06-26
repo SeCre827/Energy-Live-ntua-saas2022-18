@@ -8,13 +8,14 @@ export default function useToken() {
     const tokenString = localStorage.getItem("token");
     if (tokenString) {
 
-      console.log(tokenString)
+      console.log("token",tokenString)
       const decodedToken = jwt_decode(tokenString);
       const now = new Date().getTime();
       const expiresIn = decodedToken.exp*1000 - now;
 
       if (expiresIn <= 0) {
         localStorage.removeItem("token");
+        console.log("found expired token and removed it")
         return undefined;
       } else return tokenString;
 

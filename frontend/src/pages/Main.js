@@ -58,6 +58,8 @@ const Main = ({token, setLoginData}) => {
     quantity: "atl"
   })
 
+  const [ latestUpdate, setLatestUpdate ] = useState(null);
+
   const listenerRes = useFetchListener(onSuccess, onError, token, queryParams.quantity);
   
   const atlRes = useATLData(onSuccess, onError, token, queryParams.dateFrom, queryParams.countryA);
@@ -67,6 +69,23 @@ const Main = ({token, setLoginData}) => {
   const pfRes = usePFData(onSuccess, onError, token, queryParams.dateFrom, queryParams.countryA, queryParams.countryB);
 
   const timesUpdated = useRef(0);
+
+  useEffect(() => {
+    if(listenerRes.data && latestUpdate && listenerRes.data !== latestUpdate) {
+      switch(queryParams.quantity) {
+        case "pf":
+          pfRes.refetch();
+          break;
+        case "agpt":
+          agptRes.refetch();
+          break;
+        default:
+          atlRes.refetch();
+      }
+    }
+    setLatestUpdate(listenerRes.data)
+  })
+
   useEffect(() => {
     if (timesUpdated.current <= 1) {
       console.log("More")

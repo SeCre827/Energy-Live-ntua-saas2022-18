@@ -81,7 +81,7 @@ const MainContent = ({ token, setLoginData, chartData, latest, description }) =>
             <button onClick={downloadCSV}> Download Data</button>
           </div>
           <div className={classes.finalInfo}>
-            <span>Service Status: #Live</span>
+            <span>Service Status: Live</span>
             <span>Days Left: {Math.ceil(daysLeft.days)}</span>
             <Link to='/extend-plan'>Extend Plan</Link>
             <Link to='/about'>About</Link>

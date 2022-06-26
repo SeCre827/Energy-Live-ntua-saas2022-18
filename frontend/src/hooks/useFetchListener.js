@@ -15,5 +15,6 @@ export const useFetchListener = (onSuccess, onError, token, dataset) => {
         refetchInterval: 100000,
         onSuccess: onSuccess("listener"),
         onError: onError("listener"),
+        select: (data) => data.data.latest_timestamp
       })
   }

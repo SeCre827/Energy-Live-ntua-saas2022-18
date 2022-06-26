@@ -25,9 +25,9 @@ function App() {
       const expiresIn = decodedToken.exp * 1000 - now;
       const clearExpiredToken = () => {
         setToken(undefined);
-        localStorage.removeItem('loginData');
+        localStorage.removeItem('token');
       };
-      console.log(expiresIn);
+      console.log("token expires in", expiresIn);
       tokenExpiration = setTimeout(clearExpiredToken, expiresIn);
     }
     return () => {
