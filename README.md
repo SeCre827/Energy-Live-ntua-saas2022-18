@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/62433719/173231595-c83f613f-e583-4546-9752-8001b7146c61.png" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/62433719/173231595-c83f613f-e583-4546-9752-8001b7146c61.png" alt="Logo" width="140" >
 
   <h3 align="center"> Energy Live SasS18-NTUA-2022</h3>
 
@@ -130,10 +130,11 @@ Here we have to explaind how our project works
 ## About us
 
 This project was created by our team consisting of the mebmers below:
-[Alex Kouridakis](https://github.com/alex-kouridakis)
-[Eleftherios Oikonomou](https://github.com/SeCre827)
-[Vikentios Vitalis](https://github.com/VikentiosVitalis)
-[Stefanos Tsolos](https://github.com/stefanostsolos)
+
+- [Alex Kouridakis](https://github.com/alex-kouridakis)
+- [Eleftherios Oikonomou](https://github.com/SeCre827)
+- [Vikentios Vitalis](https://github.com/VikentiosVitalis)
+- [Stefanos Tsolos](https://github.com/stefanostsolos)
 
 Feel free to reach out to us for any comment or question!
 
