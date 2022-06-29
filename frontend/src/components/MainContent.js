@@ -5,7 +5,7 @@ import classes from './MainContent.module.css';
 import jwt_decode from 'jwt-decode';
 import { DateTime } from 'luxon';
 
-const MainContent = ({ token, setLoginData }) => {
+const MainContent = ({ token, setLoginData, chartData, latest, description }) => {
   const decodedToken = jwt_decode(token);
 
   let daysLeft = DateTime.fromISO(decodedToken.licence_expiration)
@@ -14,7 +14,7 @@ const MainContent = ({ token, setLoginData }) => {
 
   const doLogout = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/signout`, {
+      const res = await fetch(`https://saas-22-18-user-mgmt.herokuapp.com/signout`, {
         method: 'post',
         mode: 'cors',
         headers: {
@@ -28,11 +28,13 @@ const MainContent = ({ token, setLoginData }) => {
         setLoginData(undefined);
         console.log('remove from storage');
         localStorage.removeItem('token');
+        window.location.reload(true)
       }
     } catch (e) {
       console.log(e);
     }
   };
+
   let chart;
   const refHandler = (ref) => {
     chart = ref;
@@ -58,27 +60,28 @@ const MainContent = ({ token, setLoginData }) => {
     <div className={classes.mainDiv}>
       <div className={classes.info}>
         <span> {decodedToken.email}</span>
-        <Link to='/welcome' onClick={doLogout}>
+        <Link to='/' onClick={doLogout}>
           {' '}
           Sign out{' '}
         </Link>
       </div>
       <div className={classes.infoDiv}>
         <div className={classes.loadAndCountry}>
-          <span>#Actual total Load</span>
-          <span>#country</span>
+          <span>{description[0]}</span>
+          <span>{description[1]}</span>
+          <span>{description[2]}</span>
         </div>
         <div className={classes.chart}>
-          <Chart giveRef={refHandler} />
+          <Chart giveRef={refHandler} chartData={chartData}/>
         </div>
-        <h2 className={classes.lastUpdate}> #Latest update</h2>
+        <h2 className={classes.lastUpdate}> { `Latest update: ${latest ? new Date(latest) : ""}`}</h2>
         <div className={classes.helperDiv}>
           <div className={classes.chartButtons}>
             <button onClick={downloadImage}> Download Image</button>
             <button onClick={downloadCSV}> Download Data</button>
           </div>
           <div className={classes.finalInfo}>
-            <span>Service Status: #Live</span>
+            <span>Service Status: Live</span>
             <span>Days Left: {Math.ceil(daysLeft.days)}</span>
             <Link to='/extend-plan'>Extend Plan</Link>
             <Link to='/about'>About</Link>

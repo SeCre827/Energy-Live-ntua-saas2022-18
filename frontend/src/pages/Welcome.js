@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import classes from './Welcome.module.css';
 import logo from '../img/logo.png';
-import { useLocation, useNavigate } from "react-router-dom";
 
 const Welcome = ({ setLoginData }) => {
 
-  const location = useLocation();
-  const navigate = useNavigate();
-
   const handleLogin = async (googleData) => {
-    console.log("old " + googleData.credential)
-    const res = await fetch('http://localhost:5000/signin', {
+    const res = await fetch('https://saas-22-18-user-mgmt.herokuapp.com/signin', {
       method: 'POST',
       body: JSON.stringify({
         token: googleData.credential,
@@ -26,14 +21,12 @@ const Welcome = ({ setLoginData }) => {
     const data = await res.json();
     console.log(data)
     setLoginData(data.token);
-    if (location.pathname === '/welcome')
-      navigate('/');
   };
 
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id: "636293118860-afe2ptnfvrgtlpghtnobkq90qespulne.apps.googleusercontent.com",
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       callback: handleLogin
     });
 

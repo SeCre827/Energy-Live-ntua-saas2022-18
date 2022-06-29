@@ -5,10 +5,10 @@ import './About.css';
 function About() {
   return (
     <main>
-      <section class='blank-banner-1'>
-        <div class='vartical-center'>
-          <div class='about-box'>
-            <h1 class='h1'>Energy Live 2022 Creators</h1>
+      <section className='blank-banner-1'>
+        <div className='vartical-center'>
+          <div className='about-box'>
+            <h1 className='h1'>Energy Live 2022 Creators</h1>
             <p>
               {' '}
               <b>Αλέξανδρος Κουριδάκης:</b>{' '}
