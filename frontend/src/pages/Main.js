@@ -143,7 +143,7 @@ const Main = ({token, setLoginData}) => {
                   agptRes.data :
                   atlRes.data
           )} 
-          latest={listenerRes.data?.data}
+          latest={listenerRes.data}
           description={chartDescription()}/>
       </div>
     </div>

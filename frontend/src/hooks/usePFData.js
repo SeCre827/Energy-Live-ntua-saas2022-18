@@ -5,7 +5,7 @@ import { nowRequestFormatter } from '../components/nowFormatter'
 export const usePFData = (onSuccess, onError, token, dateFrom, countryA, countryB) => {
 
     const fetchPF = () => {
-        return axios.get(`https://saas-22-18-pf-data-mgmt.herokuapp.com/getData/${countryA}/${countryB}/${dateFrom}/${nowRequestFormatter()}`, {
+        return axios.get(`${process.env.REACT_APP_PF}/${countryA}/${countryB}/${dateFrom}/${nowRequestFormatter()}`, {
           headers: {
             Authorization: 'Bearer ' + token
           }

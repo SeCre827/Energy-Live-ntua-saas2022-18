@@ -39,7 +39,7 @@ const Chart = (props) => {
 
   return (
     <div>
-    {props.chartData ? (
+    {props.chartData && props.chartData.length >= 1 ? (
       <HighchartsReact
         ref={chart}
         highcharts={Highcharts}

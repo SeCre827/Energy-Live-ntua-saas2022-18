@@ -4,7 +4,7 @@ import axios from 'axios';
 export const useFetchListener = (onSuccess, onError, token, dataset) => {
 
     const fetchListener = () => {
-        return axios.get(`https://saas-22-18-frontend-listener.herokuapp.com/${dataset}-latest`, {
+        return axios.get(`${process.env.REACT_APP_LISTENER}/${dataset}-latest`, {
           headers: {
             Authorization: 'Bearer ' + token
           }
@@ -12,7 +12,7 @@ export const useFetchListener = (onSuccess, onError, token, dataset) => {
       }
 
     return useQuery('front-listener-get', fetchListener, {
-        refetchInterval: 100000,
+        refetchInterval: 3000,
         onSuccess: onSuccess("listener"),
         onError: onError("listener"),
         select: (data) => data.data.latest_timestamp

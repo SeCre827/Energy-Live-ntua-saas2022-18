@@ -74,7 +74,7 @@ const MainContent = ({ token, setLoginData, chartData, latest, description }) =>
         <div className={classes.chart}>
           <Chart giveRef={refHandler} chartData={chartData}/>
         </div>
-        <h2 className={classes.lastUpdate}> { `Latest update: ${latest ? new Date(latest.latest_timestamp) : ""}`}</h2>
+        <h2 className={classes.lastUpdate}> { `Latest update: ${latest ? new Date(latest) : ""}`}</h2>
         <div className={classes.helperDiv}>
           <div className={classes.chartButtons}>
             <button onClick={downloadImage}> Download Image</button>

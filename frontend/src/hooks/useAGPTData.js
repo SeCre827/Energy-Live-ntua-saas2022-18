@@ -5,7 +5,7 @@ import { nowRequestFormatter } from '../components/nowFormatter'
 export const useAGPTData = (onSuccess, onError, token, dateFrom, country, generationType) => {
 
     const fetchAGPT = () => {
-        return axios.get(`https://saas-22-18-agpt-data-mgmt.herokuapp.com/getData/${country}/${generationType}/${dateFrom}/${nowRequestFormatter()}`, {
+        return axios.get(`${process.env.REACT_APP_AGPT}/${country}/${generationType}/${dateFrom}/${nowRequestFormatter()}`, {
           headers: {
             Authorization: 'Bearer ' + token
           }

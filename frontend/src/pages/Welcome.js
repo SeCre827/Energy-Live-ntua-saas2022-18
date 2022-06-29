@@ -26,7 +26,7 @@ const Welcome = ({ setLoginData }) => {
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id: "636293118860-afe2ptnfvrgtlpghtnobkq90qespulne.apps.googleusercontent.com",
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       callback: handleLogin
     });
 
