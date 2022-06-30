@@ -3,12 +3,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/62433719/173231595-c83f613f-e583-4546-9752-8001b7146c61.png" alt="Logo" width="140" >
+    <img src="https://user-images.githubusercontent.com/62433719/173231595-c83f613f-e583-4546-9752-8001b7146c61.png" alt="Logo" width="350" >
 
   <h3 align="center"> Energy Live SasS18-NTUA-2022</h3>
 
   <p align="center">
-  A SAAS project that folows the microservice archicture.
+  A SAAS project that follows the microservice archicture.
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
   </p>
@@ -40,7 +40,7 @@
 
 ## About The Project
 
-This project was created for the SaaS course of NTUA ECE. We were asked to implement a system that gets energy Data from the [entso-e](https://www.entsoe.eu/) API for all the countries, process it and returns the required information to the user in a web app. The project follows the Micorservice architecture, uses Kafka as a choreographer between the microservices and serves the result in a website on the browser.
+This project was created for the SaaS course of ECE NTUA. We were asked to implement a system that gets energy Data from the [entso-e](https://www.entsoe.eu/) API for all the countries, processes it and returns the required information to the user in a web app. The project follows the Microservice architecture, uses Kafka as a choreographer between the microservices and serves the result in a website on the browser.
 
 <div align="center">
 <img src="https://user-images.githubusercontent.com/75163039/176540352-4f92d4bc-8d5c-4144-a25c-d9951003d5e2.png" alt="overview" width="900" >
@@ -81,13 +81,11 @@ This section lists major frameworks/libraries that were used to bootstrap our pr
 
 ## Getting Started
 
-This section in about running the project either by installing and running it in your local machine.
+This section is about running the project by installing and running it on your local machine.
 Or if you just want to see how it works, you can see our live demo [here](https://i.wish.iknew/).
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
-
-This is an example of how to list things you need to use the softwareX.
 
 - [node.js](https://nodejs.org/en/)
   <br/>
@@ -106,7 +104,7 @@ Below are the instructions you have to follow to run the project on your local m
    ```sh
    git clone https://github.com/ntua/saas2022-18
    ```
-2. Set up kafka and the corresponding databases for each microservice following the instructionss found in the kafkatxt? TODO
+2. Set up kafka and the corresponding databases for each microservice following the instructions found in the kafkatxt? TODO
    <br/>
 3. For all the microservices (folders inside the microservice folder), admin, and frontend folders to install the dependencies, you have to run:
    ```sh
