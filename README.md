@@ -32,7 +32,7 @@
       </ul>
     </li>
     <li><a href="#technical-details">Technical Details</a></li>
-    <li><a href="#about-us">About us</a></li>
+    <li><a href="#about-us">About Us</a></li>
   </ol>
 </details>
 
@@ -125,7 +125,7 @@ Here we have to explaind how our project works
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## About us
+## About Us
 
 This project was created by our team consisting of the mebmers below:
 
