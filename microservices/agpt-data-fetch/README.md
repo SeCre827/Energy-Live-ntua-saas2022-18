@@ -1,4 +1,4 @@
-# "Physical Flows" Data Fetch
+# "Aggregated Generation Per Type" Data Fetch
 
 Microservice developed using the NestJS framework as part of the semester project of the SaaS course, ECE NTUA, 8th Semester, Team 2022-18.
 
@@ -25,4 +25,4 @@ $ npm run start:prod
 
 ## Functionality
 
-This microservice subscribes to the ADMIN_FETCH topic of the Kafka Event Bus upon initialisation. Whenever the Admin Application publishes to that topic, this microservice downloads the current file corresponding to the "Physical Flows" dataset, from the SFTP server. The file is then parsed, and a JSON containing only the required information is created. This JSON is finally uploaded to Google Drive. Upon successful upload, this microservice publishes a new message to the FETCHED_PF topic, to notify the next microservice ("Physical Flows" Data Management).
+This microservice subscribes to the ADMIN_FETCH topic of the Kafka Event Bus upon initialisation. Whenever the Admin Application publishes to that topic, this microservice downloads the current file corresponding to the "Aggregated Generation Per Type" dataset, from the SFTP server. The file is then parsed, and a JSON containing only the required information is created. This JSON is finally uploaded to Google Drive. Upon successful upload, this microservice publishes a new message to the FETCHED_AGPT topic, to notify the next microservice ("Aggregated Generation Per Type" Data Management).
