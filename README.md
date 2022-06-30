@@ -5,7 +5,7 @@
 <div align="center">
     <img src="https://user-images.githubusercontent.com/62433719/173231595-c83f613f-e583-4546-9752-8001b7146c61.png" alt="Logo" width="350" >
 
-  <h3 align="center"> Energy Live SasS18-NTUA-2022</h3>
+  <h3 align="center"> Energy Live SaaS2022-18 </h3>
 
   <p align="center">
   A SAAS project that follows the microservice archicture.
