@@ -1,0 +1,83 @@
+{
+  "autorun": false,
+  "terminals": [
+    {
+      "name": "admin",
+      "focus": true,
+      "commands": [
+        "cd admin",
+        "npm install"
+      ]
+    },
+    {
+      "name": "agpt-fetch",
+      "commands": [
+        "cd microservices/agpt-data-fetch",
+        "npm install",
+        "npm start"
+      ]
+    },
+    {
+      "name": "agpt",
+      "commands": [
+        "cd microservices/agpt-data-management",
+        "npm install",
+        "npm start"
+      ]
+    },
+    {
+      "name": "atl-fetch",
+      "commands": [
+        "cd microservices/atl-data-fetch",
+        "npm install",
+        "npm start"
+      ]
+    },
+    {
+      "name": "atl",
+      "commands": [
+        "cd microservices/atl-data-management",
+        "npm install",
+        "npm start"
+      ]
+    },
+    {
+      "name": "pf-fetch",
+      "commands": [
+        "cd microservices/pf-data-fetch",
+        "npm install",
+        "npm start"
+      ]
+    },
+    {
+      "name": "pf",
+      "commands": [
+        "cd microservices/pf-data-management",
+        "npm install",
+        "npm start"
+      ]
+    },
+    {
+      "name": "user",
+      "commands": [
+        "cd microservices/user-management",
+        "npm install",
+        "npm start"
+      ]
+    },
+    {
+      "name": "listener",
+      "commands": [
+        "cd microservices/frontend-listener",
+        "npm install",
+        "npm start"
+      ]
+    },
+    {
+      "name": "frontend",
+      "commands": [
+        "cd frontend"
+      ]
+    }
+  ]
+}
