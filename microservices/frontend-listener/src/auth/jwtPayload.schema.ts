@@ -14,7 +14,7 @@ const time_max = 9999999999;
 export const JwtPayloadSchema = Joi.object({
   email: Joi.string().pattern(email_regex).required(),
   first_name: Joi.string().optional(),
-  last_name: Joi.string().optional(),
+  last_name: Joi.string().allow(null).optional(),
   licence_expiration: Joi.string().pattern(timestamp_regex).required(),
   last_login: Joi.string().pattern(timestamp_regex).allow(null).required(),
   exp: Joi.number().min(time_min).max(time_max).required(),

@@ -34,16 +34,25 @@ async function downloadData(drive, fileId) {
   return json.data;
 }
 
-const kafka = new Kafka({
-  clientId: process.env.CLIENT_ID,
-  brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
-  ssl: true,
-  sasl: {
-    mechanism: 'scram-sha-256',
-    username: process.env.CLOUDKARAFKA_USERNAME,
-    password: process.env.CLOUDKARAFKA_PASSWORD,
-  },
-});
+// Setup an instance of Kafka, depending on the environment (production or development)
+const kafkaClientOptions =
+  process.env.NODE_ENV === 'development'
+    ? {
+        clientId: process.env.CLIENT_ID,
+        brokers: [process.env.KAFKA_URI],
+      }
+    : {
+        clientId: process.env.CLIENT_ID,
+        brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
+        ssl: true,
+        sasl: {
+          mechanism: 'scram-sha-256',
+          username: process.env.CLOUDKARAFKA_USERNAME,
+          password: process.env.CLOUDKARAFKA_PASSWORD,
+        },
+      };
+
+const kafka = new Kafka(kafkaClientOptions);
 
 kafkaController = async () => {
   // Initialise Google Drive service

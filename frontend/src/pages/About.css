@@ -45,3 +45,8 @@
   text-align:center;
   margin-right: 7%;
 }
+
+.about-box p a:hover {
+  background-color: transparent;
+  color:  #551A8B;
+}

@@ -7,9 +7,12 @@
     "update_files": "node dist/index.js update_files",
     "reset_files": "node dist/index.js reset_files",
     "delete_uploaded": "node dist/index.js delete_uploaded",
-    "fetch_files": "node dist/index.js fetch_files",
-    "reset": "node dist/index.js reset",
-    "status": "node dist/index.js status"
+    "dev:fetch_files": "NODE_ENV=development node dist/index.js fetch_files",
+    "dev:reset": "NODE_ENV=development node dist/index.js reset",
+    "dev:status": "NODE_ENV=development node dist/index.js status",
+    "prod:fetch_files": "NODE_ENV=production node dist/index.js fetch_files",
+    "prod:reset": "NODE_ENV=production node dist/index.js reset",
+    "prod:status": "NODE_ENV=production node dist/index.js status"
   },
   "author": "",
   "license": "ISC",

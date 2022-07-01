@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom';
 const ExtendPlan = ({ token, setLoginData }) => {
   const navigate = useNavigate();
   const decodedToken = jwt_decode(token);
-  console.log(decodedToken);
+
   const [Email, setEmail] = useState(decodedToken.email);
-  const [emailIsValid, setEmailIsValid] = useState();
+  const [emailIsValid, setEmailIsValid] = useState(true);
   const [FirstName, setFirstName] = useState(decodedToken.first_name);
   const [LastName, setLastName] = useState(
     decodedToken.last_name || 'Not provided'
@@ -24,9 +24,9 @@ const ExtendPlan = ({ token, setLoginData }) => {
     )
   );
 
-  let daysLeft = DateTime.fromISO(decodedToken.licence_expiration)
+  let daysLeft = decodedToken.licence_expiration ? DateTime.fromISO(decodedToken.licence_expiration)
     .diffNow(['days', 'hours', 'minutes'])
-    .toObject();
+    .toObject() : {days: 0, hours: 0, minutes: 0}
 
   let daysLeftOutput = `${daysLeft.days} days ${
     daysLeft.hours
@@ -57,7 +57,7 @@ const ExtendPlan = ({ token, setLoginData }) => {
       body: urlencoded,
     };
 
-    fetch('http://localhost:5000/extend-licence', requestOptions)
+    fetch('https://saas-22-18-user-mgmt.herokuapp.com/extend-licence', requestOptions)
       .then((response) => response.text())
       .then((result) => {
         // update token in local storage
@@ -107,7 +107,7 @@ const ExtendPlan = ({ token, setLoginData }) => {
               readOnly
               value={Email}
               onChange={emailChangeHandler}
-              onBlur={validateEmailHandler}
+              onMouseLeave={validateEmailHandler}
             />
           </div>
           <div className={classes.control}>

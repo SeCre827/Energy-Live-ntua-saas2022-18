@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { JwtStrategy } from './auth/jwtStrategy';
+import { kafkaClientOptions } from './utils/kafkaClientOptions';
 
 @Module({
   imports: [
@@ -22,16 +23,7 @@ import { JwtStrategy } from './auth/jwtStrategy';
         name: 'KAFKA',
         transport: Transport.KAFKA,
         options: {
-          client: {
-            clientId: process.env.CLIENT_ID,
-            brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
-            ssl: true,
-            sasl: {
-              mechanism: 'scram-sha-256',
-              username: process.env.CLOUDKARAFKA_USERNAME,
-              password: process.env.CLOUDKARAFKA_PASSWORD,
-            },
-          },
+          client: kafkaClientOptions,
         },
       },
     ]),

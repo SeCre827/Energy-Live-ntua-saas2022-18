@@ -17,7 +17,7 @@
     "@types/node": "^17.0.31",
     "nodemon": "^2.0.16"
   },
-  "name": "backend",
+  "name": "pf-data-management",
   "version": "1.0.0",
   "main": "src/app.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "start": "nodemon src/app.js",
     "start:prod": "node --optimize_for_size --max_old_space_size=460 src/app.js"
   },
-  "author": "",
+  "author": "Lefteris Oikonomou",
   "license": "ISC",
   "description": ""
 }

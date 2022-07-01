@@ -1,13 +1,25 @@
 import { Consumer, Producer } from 'kafkajs';
 import { wakeup } from './wakeup';
 
+const ADMIN_TOPIC = 
+  process.env.NODE_ENV == 'development' 
+  ? process.env.ADMIN_TOPIC_DEV 
+  : process.env.ADMIN_TOPIC
+
+const ADMIN_RESPONSE_TOPIC = 
+  process.env.NODE_ENV == 'development' 
+  ? process.env.ADMIN_RESPONSE_TOPIC_DEV 
+  : process.env.ADMIN_RESPONSE_TOPIC
+
 export async function reset(producer: Producer, consumer: Consumer) {
-  await wakeup();
+  if (process.env.NODE_ENV !== 'deployment') {
+    await wakeup();
+  }
 
   // Initialise consumer
   await consumer.connect();
   await consumer.subscribe({
-    topic: process.env.ADMIN_RESPONSE_TOPIC
+    topic: ADMIN_RESPONSE_TOPIC
   });
 
   // Run consumer to collect responses from microservices
@@ -23,7 +35,7 @@ export async function reset(producer: Producer, consumer: Consumer) {
   // Publish RESET event
   await producer.connect();
   await producer.send({
-    topic: process.env.ADMIN_TOPIC,
+    topic: ADMIN_TOPIC,
     messages: [{ 
       value: JSON.stringify({ operation: 'RESET' }) 
     }],

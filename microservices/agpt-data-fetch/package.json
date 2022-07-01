@@ -1,8 +1,8 @@
 {
-  "name": "atl-data-fetch",
-  "version": "0.0.1",
+  "name": "agpt-data-fetch",
+  "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": "Alexandros Kouridakis",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

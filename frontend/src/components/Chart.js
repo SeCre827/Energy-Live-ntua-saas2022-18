@@ -1,11 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import highchartsAccessibility from "highcharts/modules/accessibility";
 require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data')(Highcharts);
 
 // import HC_exporting from 'highcharts/modules/exporting';
 // HC_exporting(Highcharts);
+
+highchartsAccessibility(Highcharts);
 
 const Chart = (props) => {
   const chart = useRef();
@@ -19,36 +22,36 @@ const Chart = (props) => {
       type: 'spline',
     },
     title: {
-      text: 'My chart',
+      text: 'Results',
     },
+    turboThreshold: 0,
     series: [
       {
-        data: [1, 2, 1, 4, 3, 6, 123, 412, 5, 214, 123, 61, 123],
+        turboThreshold: 5000,
+        marker: {
+          enabled: false
+        },
+        name: "value",
+        data: props.chartData ? props.chartData : [],
       },
-    ],
+    ]
   };
 
   return (
     <div>
+    {props.chartData && props.chartData.length >= 1 ? (
       <HighchartsReact
         ref={chart}
         highcharts={Highcharts}
         //   constructorType={'stockChart'}
         options={options}
       />
-    </div>
+     ) : (
+      <h2>No data found</h2>
+    )
+  }
+  </div>
   );
 };
 
 export default Chart;
-
-//   const options = {
-//     title: {
-//       text: 'My stock chart',
-//     },
-//     series: [
-//       {
-//         data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9],
-//       },
-//     ],
-//   };

@@ -1,6 +1,4 @@
-.env
+#.env
 node_modules
 parsescripts
 
-# Google service account credentials
-credentials.json

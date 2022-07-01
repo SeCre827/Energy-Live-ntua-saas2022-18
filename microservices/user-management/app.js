@@ -2,6 +2,7 @@
 const express = require('express');
 // const path = require('path');
 const dotenv = require('dotenv');
+dotenv.config();
 const cors = require('cors');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
@@ -9,7 +10,6 @@ const jwt = require('jsonwebtoken');
 const controllers = require('./contollers/controllers');
 const sequelize = require('./utils/database');
 
-dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -52,15 +52,14 @@ app.post(
 );
 
 // Global error handler
-app.use((error, req, res) => {
+app.use((error, res) => {
   res.status(error.httpStatusCode || 500).json({
     ErrorMessage: error.message,
   });
-  console.log('Global error handler');
 });
 
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     app.listen(process.env.PORT);
   })

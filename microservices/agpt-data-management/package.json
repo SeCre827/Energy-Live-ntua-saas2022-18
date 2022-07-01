@@ -1,7 +1,8 @@
 {
-  "name": "agpt-datamanagement",
+  "name": "agpt-data-management",
   "version": "1.0.0",
   "main": "app.js",
+  "author": "Stefanos Tsolos & Alexandros Kouridakis",
   "scripts": {
     "start": "nodemon server.js ",
     "start:prod": "node --optimize_for_size --max_old_space_size=460 server.js"
