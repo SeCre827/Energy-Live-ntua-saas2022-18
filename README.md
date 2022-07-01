@@ -53,6 +53,7 @@ This project was created for the SaaS course of ECE NTUA. We were asked to imple
 <img src="https://user-images.githubusercontent.com/75163039/176540352-4f92d4bc-8d5c-4144-a25c-d9951003d5e2.png" alt="overview" width="900" >
 </div>
 
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
@@ -128,7 +129,11 @@ Below are the instructions you have to follow to run the project on your local m
 
 ## Technical Details
 
---------->screen of the architecture<-------------
+
+<div align="center">
+<img src="https://user-images.githubusercontent.com/75163039/176975258-932a1817-09a9-4461-bf8c-c3fc3d2f0a6b.png" alt="overview" width="900" >
+</div>
+
 
 Our app gets data from the ento-e servers, process them and displays the proper info, based on the user query, to the user. Because the data files were roughly 300gbs and we were 30teams in the class, we use data from January to March that are already saved and gives to us by the tutors. Because of that, we simulate the API calls using google Drive as our storage (more details on that below).
 
