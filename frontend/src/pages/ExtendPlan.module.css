@@ -92,12 +92,12 @@
 .cancelDiv {
   text-align: center;
   margin-bottom: 3.2rem;
+  color: black;
 }
 
 .cancelDiv a {
   padding: 1rem;
   border-radius: 10%;
-  color: inherit;
 }
 
 .cancelDiv a:hover {

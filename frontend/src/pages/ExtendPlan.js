@@ -153,17 +153,13 @@ const ExtendPlan = ({ token, setLoginData }) => {
               Extend
             </Button>
             <Button
-              type='submit'
               className={classes.btnGrey}
               disabled={!emailIsValid}
             >
-              Cancel
+              <Link to='/' className={classes.cancelDiv}>
+                Back
+              </Link>
             </Button>
-          </div>
-          <div className={classes.cancelDiv}>
-            <Link to='/' className={classes.cancelBtn}>
-              Back
-            </Link>
           </div>
         </form>
       </Card>

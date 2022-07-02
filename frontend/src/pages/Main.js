@@ -68,7 +68,7 @@ const Main = ({token, setLoginData}) => {
 
   const pfRes = usePFData(onSuccess, onError, token, queryParams.dateFrom, queryParams.countryA, queryParams.countryB);
 
-  const timesUpdated = useRef(0);
+  const firstUpdate = useRef(true);
 
   useEffect(() => {
     if(listenerRes.data && latestUpdate && listenerRes.data !== latestUpdate) {
@@ -87,14 +87,15 @@ const Main = ({token, setLoginData}) => {
   })
 
   useEffect(() => {
-    if (timesUpdated.current <= 1) {
-      console.log("More")
-      timesUpdated.current = timesUpdated.current + 1;
+    if (firstUpdate.current) {
+      console.log("First render");
+      firstUpdate.current = false;
+      return;
     }
 
     else { 
-      console.log("second")
-      console.log(timesUpdated)
+      console.log("Second Render");
+      console.log(firstUpdate);
       listenerRes.refetch();
       switch(queryParams.quantity) {
         case "pf":
