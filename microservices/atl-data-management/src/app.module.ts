@@ -4,19 +4,26 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { JwtStrategy } from './auth/jwtStrategy';
+import { kafkaClientOptions } from './utils/kafkaClientOptions';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(), // Load TypeORM configuration from file
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      synchronize: false,
+      logging: false,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    }),
     ClientsModule.register([
       {
         name: 'KAFKA',
         transport: Transport.KAFKA,
         options: {
-          client: {
-            clientId: process.env.CLIENT_ID,
-            brokers: [process.env.KAFKA_URI],
-          },
+          client: kafkaClientOptions,
         },
       },
     ]),

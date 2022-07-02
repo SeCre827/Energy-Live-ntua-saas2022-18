@@ -12,10 +12,26 @@ import { deleteUploaded } from './deleteUploaded';
  * APACHE KAFKA CONFIGURATION
  */
 
-const kafka = new Kafka({
-  clientId: process.env.CLIENT_ID,
-  brokers: [process.env.KAFKA_URI],
-});
+type mechanismType = 'scram-sha-256';
+
+const kafkaClientOptions =
+process.env.NODE_ENV === 'development'
+  ? {
+      clientId: process.env.CLIENT_ID,
+      brokers: [process.env.KAFKA_URI],
+    }
+  : {
+      clientId: process.env.CLIENT_ID,
+      brokers: process.env.CLOUDKARAFKA_BROKERS.split(','),
+      ssl: true,
+      sasl: {
+        mechanism: <mechanismType>'scram-sha-256',
+        username: process.env.CLOUDKARAFKA_USERNAME,
+        password: process.env.CLOUDKARAFKA_PASSWORD,
+      },
+    };
+
+const kafka = new Kafka(kafkaClientOptions);
 
 const producer = kafka.producer();
 const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
@@ -69,7 +85,7 @@ const drive = google.drive({
   auth: auth,
 });
 
-async function main() {  
+async function main() { 
   switch(process.argv[2]) {
     case 'update_files':
       await updateFiles(drive); break;

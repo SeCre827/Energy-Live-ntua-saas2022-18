@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { readFile, writeFile } from 'fs/promises';
 
-type Dataset = 'ATL' | 'AGPT' | 'PF';
+export type Dataset = 'ATL' | 'AGPT' | 'PF';
 
 @Injectable()
 export class AppService {
@@ -28,13 +28,14 @@ export class AppService {
       PF: '1970-01-01T00:00:00.000Z',
     };
     await writeFile('./latest_data.json', JSON.stringify(data));
-    this.client.emit(process.env.RESET_RESPONSE_TOPIC, {
+    this.client.emit(process.env.ADMIN_RESPONSE_TOPIC, {
       name: 'frontend-listener',
+      reset: 'OK',
     });
   }
 
   status() {
-    this.client.emit(process.env.STATUS_RESPONSE_TOPIC, {
+    this.client.emit(process.env.ADMIN_RESPONSE_TOPIC, {
       name: 'frontend-listener',
       status: 'OK',
     });

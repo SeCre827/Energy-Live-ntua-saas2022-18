@@ -35,11 +35,6 @@ exports.getData = (req, res, next) => {
             timestamp: { [Op.between]: [dateFrom, dateTo] },
         },
     }).then((agpt) => {
-
-        if (!agpt.length) {
-            const error = new Error('No data available.');
-            return next(error);
-        }
         const fetched = {
             countryId: countryID,
             productionType: prodType,
@@ -65,10 +60,6 @@ exports.importData = async (data) => {
         new_data = await fillMissingData(data);
         await AggrGenerationPerType.bulkCreate(new_data, { updateOnDuplicate: ['value'] })
             .then((agpt) => {
-                if (!agpt) {
-                    const error = new Error('Error, data was not updated.');
-                    return next(error);
-                }
                 console.log(`${agpt.length} entries were updated.`);
             }).catch((err) => {
             console.log('A database error has occurred.');

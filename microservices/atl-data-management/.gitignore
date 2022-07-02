@@ -38,7 +38,4 @@ lerna-debug.log*
 ormconfig.json
 
 # Environment variables
-.env
-
-# Google Service Account credentials
-credentials.json
+# .env

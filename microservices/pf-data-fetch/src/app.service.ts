@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { google } from 'googleapis';
 import { downloadFile } from './utils/downloadFile';
+import { messageLog } from './utils/messageLog';
 import { parseFile } from './utils/parseFile';
 import { uploadParsed } from './utils/uploadParsed';
 
@@ -33,11 +34,16 @@ export class AppService {
     const parsed = await parseFile(fetched);
     const uploaded = await uploadParsed(drive, parsed);
 
-    this.client.emit(process.env.NEW_DATA_TOPIC, uploaded);
+    // Publish FETCHED event
+    this.client.emit(process.env.FETCHED_TOPIC, {
+      dataset: 'PF',
+      file_id: uploaded.id,
+    });
+    messageLog('Uploaded parsed JSON file');
   }
 
   status() {
-    this.client.emit(process.env.STATUS_RESPONSE_TOPIC, {
+    this.client.emit(process.env.ADMIN_RESPONSE_TOPIC, {
       name: 'pf-data-fetch',
       status: 'OK',
     });

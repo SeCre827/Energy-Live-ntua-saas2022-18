@@ -1,8 +1,8 @@
 {
-  "name": "atl-data-fetch",
-  "version": "0.0.1",
+  "name": "agpt-data-fetch",
+  "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": "Alexandros Kouridakis",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -12,7 +12,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node --optimize_for_size --max_old_space_size=460 dist/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -30,14 +30,15 @@
     "luxon": "^2.3.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
-  },
-  "devDependencies": {
+    "rxjs": "^7.2.0",
+    "kafkajs": "^2.0.0",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/config": "^2.0.0",
     "@nestjs/microservices": "^8.4.4",
     "@nestjs/schematics": "^8.0.0",
-    "@nestjs/testing": "^8.0.0",
+    "@nestjs/testing": "^8.0.0"
+  },
+  "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/jest": "27.5.0",
     "@types/multer": "^1.4.7",
@@ -49,7 +50,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "28.0.3",
-    "kafkajs": "^2.0.0",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",

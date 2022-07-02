@@ -2,15 +2,14 @@ import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { kafkaClientOptions } from './utils/kafkaOptions';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.KAFKA,
     options: {
-      client: {
-        brokers: [process.env.KAFKA_URI],
-      },
+      client: kafkaClientOptions,
       consumer: {
         groupId: process.env.GROUP_ID,
       },
@@ -18,6 +17,6 @@ async function bootstrap() {
   });
   await app.startAllMicroservices();
   app.enableCors();
-  await app.listen(process.env.PORT);
+  app.listen(process.env.PORT);
 }
 bootstrap();

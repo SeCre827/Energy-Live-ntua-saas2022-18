@@ -5,7 +5,7 @@ node_modules
 dist
 
 # Google service account credential file
-credentials.json
+# credentials.json
 
 # Environment variables
-.env
+# .env

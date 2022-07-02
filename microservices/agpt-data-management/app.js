@@ -1,4 +1,3 @@
-require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
@@ -52,7 +51,7 @@ app.use(function(req, res, next) {
 // log errors
 app.use(function (err, req, res, next) {
   const status = err.status || 500
-  if (status >= 500 || req.app.get('env')) {
+  if (status >= 500) {
     console.error(err.stack);
   }
   next(err);
