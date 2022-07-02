@@ -51,7 +51,7 @@ const Welcome = ({ setLoginData }) => {
             <Link to='/about'> About </Link>
           </li>
           <li>
-            <Link to='/plans'> Plans </Link>
+            <Link to='/pricing'> Plans </Link>
           </li>
           <li>
             {/* <Link to='/legal'> Legal </Link> */}

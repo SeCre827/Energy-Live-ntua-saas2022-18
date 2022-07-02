@@ -4,7 +4,7 @@ import Welcome from './pages/Welcome';
 import Main from './pages/Main';
 import ExtendPlan from './pages/ExtendPlan';
 import About from './pages/About';
-import Plans from './pages/Plans';
+import Plans from './pages/Pricing';
 import Legal from './pages/Legal';
 import NotFound from './pages/NotFound';
 import useToken from './hooks/useToken';
@@ -70,7 +70,7 @@ function App() {
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/plans' element={<Plans />} />
+          <Route path='/pricing' element={<Plans />} />
           <Route path='/legal' element={<Legal />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
