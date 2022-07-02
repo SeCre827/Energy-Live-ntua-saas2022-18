@@ -114,7 +114,7 @@ Below are the instructions you have to follow to run the project on your local m
    ```
 2. Set up kafka and the corresponding databases for each microservice following the instructions found in the kafkatxt? TODO
    <br/>
-3. For all the microservices (folders inside the microservice folder), admin and frontend folders, to install the dependencies you have to run:
+3. For all the microservices (folders inside the microservices folder), admin and frontend folders, to install the dependencies you have to run:
    ```sh
    npm install
    ```
@@ -143,7 +143,7 @@ The project flow and structure can be split into those main categories:
 
 The files are saved in a Google Drive storage. The fetch microservices download the data from Google Drive and parses them, so only the useful data are kept in the format we need them. Then, they upload the parse files back to Google Drive so the other microservices can get them.
 
-### Kafka and Orchestartion
+### Kafka and Orchestration
 
 Apahce Kafka is used as the middleman between all the diferent services. Using the Publish/Subscribe Messaging everything is getting coordinated. Specifically, there is an Admin Application, from which we can simulate the real-time requests. Admin application publishes a message to the corresponding topic in Kafka (Admin_Fetch), the proper data fetch microservice receives it, so now it is informed that new data have arrived. The data fetch microservice downloads the data, parses them and uploads the parsed data. Then it publishes a new message to another topic in Kafka, the Fetched Topic, and the next part of our app comes in play.
 
