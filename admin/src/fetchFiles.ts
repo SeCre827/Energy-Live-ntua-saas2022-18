@@ -7,7 +7,7 @@ const ADMIN_TOPIC =
   : process.env.ADMIN_TOPIC
 
 export async function fetchFiles(producer: Producer) {
-  if (process.env.NODE_ENV !== 'deployment') {
+  if (process.env.NODE_ENV !== 'development') {
     await wakeup();
   }
   

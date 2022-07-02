@@ -12,7 +12,7 @@ const ADMIN_RESPONSE_TOPIC =
   : process.env.ADMIN_RESPONSE_TOPIC
 
 export async function reset(producer: Producer, consumer: Consumer) {
-  if (process.env.NODE_ENV !== 'deployment') {
+  if (process.env.NODE_ENV !== 'development') {
     await wakeup();
   }
 
