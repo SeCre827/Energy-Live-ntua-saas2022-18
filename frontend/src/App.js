@@ -27,7 +27,7 @@ function App() {
         setToken(undefined);
         localStorage.removeItem('token');
       };
-      console.log("token expires in", expiresIn);
+      console.log('token expires in', expiresIn);
       tokenExpiration = setTimeout(clearExpiredToken, expiresIn);
     }
     return () => {
@@ -40,41 +40,62 @@ function App() {
 
   const isValid = (tkn) => {
     return tkn.licence_expiration !== null;
-  }
+  };
+
+  // api calls code to awake the microservices
+  useEffect(() => {
+    Promise.all([
+      fetch(`https://saas-22-18-frontend-listener.herokuapp.com/`),
+      fetch(`${process.env.REACT_APP_ATL}/`),
+      fetch(`${process.env.REACT_APP_AGPT}/`),
+      fetch(`${process.env.REACT_APP_PF}/`),
+    ])
+      .then(function (responses) {
+        // Get a JSON object from each of the responses
+        console.clear();
+        console.log('Apis Awakened');
+        console.log(responses);
+      })
+      .catch(function (error) {
+        console.clear();
+        console.log('No response. An error occured');
+      });
+  }, []);
+  // end of api calls code to awake the microservices
 
   return (
     <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route
-            path='/'
-            element={
-              token ? (
-                isValid(jwt_decode(token)) ? (
-                  <Main token={token} setLoginData={setToken} />
-                ) : (
-                  <ExtendPlan token={token} setLoginData={setToken} />
-                )
+      <Routes>
+        <Route
+          path='/'
+          element={
+            token ? (
+              isValid(jwt_decode(token)) ? (
+                <Main token={token} setLoginData={setToken} />
               ) : (
-                <Welcome setLoginData={setToken} />
-              )
-            }
-          />
-          <Route
-            path='/extend-plan'
-            element={
-              token ? (
                 <ExtendPlan token={token} setLoginData={setToken} />
-              ) : (
-                <Welcome setLoginData={setToken} />
               )
-            }
-          />
-          <Route path='/about' element={<About />} />
-          <Route path='/pricing' element={<Plans />} />
-          <Route path='/legal' element={<Legal />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-        <ReactQueryDevtools initialIsOpem={false} position='bottom-right' />
+            ) : (
+              <Welcome setLoginData={setToken} />
+            )
+          }
+        />
+        <Route
+          path='/extend-plan'
+          element={
+            token ? (
+              <ExtendPlan token={token} setLoginData={setToken} />
+            ) : (
+              <Welcome setLoginData={setToken} />
+            )
+          }
+        />
+        <Route path='/about' element={<About />} />
+        <Route path='/pricing' element={<Plans />} />
+        <Route path='/legal' element={<Legal />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+      <ReactQueryDevtools initialIsOpem={false} position='bottom-right' />
     </QueryClientProvider>
   );
 }
