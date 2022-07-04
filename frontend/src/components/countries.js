@@ -40,7 +40,7 @@ const countries = [
     ['CH', 'Switzerland'],
     ['TR', 'Turkey'],
     ['UA', 'Ukraine'],
-    ['UK', 'United Kingdom'],
+    ['GB', 'United Kingdom'],
     ['RU', 'Russia'],
     ['XK', 'Kosovo']
 ]
