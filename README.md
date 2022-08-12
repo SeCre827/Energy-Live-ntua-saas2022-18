@@ -107,10 +107,6 @@ The DBMS used for each of the microservices' database is [PostgreSQL](https://ww
 
 The code contained within this repository has been adjusted so that it can work both in a development (i.e. local deployment) and in a production (i.e. Heroku deployment) environment. This enabled our team to develop code locally and test that everything works as intended, before deploying each version of the software. We will only be describing how to use the application deployed on Heroku and will not present the steps needed to run the application locally, as the setup required is rather involved and is beyond the scope of this document, whose purpose is to summarize the methods and technologies used in this project.
 
-#### Note about sensitive information
-
-Since the code contained in this repository should be able to run locally (given the appropriate setup), it contains sensitive information that should not be checked into a source control, especially not in a public repository (for example, Google Cloud credentials and JWT signatures can be found accompanying the code). This has been done on purpose, to facillitate exhibition of the project for the purposes of assessment, and would obviously constitute a serious security breach in a professional environment.
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Running the deployed application
