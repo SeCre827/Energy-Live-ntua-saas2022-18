@@ -207,6 +207,7 @@ This project was created by our team consisting of the members below:
 - [Eleftherios Oikonomou](https://github.com/SeCre827)
 - [Vikentios Vitalis](https://github.com/VikentiosVitalis)
 - [Stefanos Tsolos](https://github.com/stefanostsolos)
+- [Georgios Mpratsiotis](https://github.com/ICantChooseAName) 
 
 Feel free to reach out to us for any comment or question!
 
